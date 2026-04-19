@@ -1,0 +1,3823 @@
+% Use lualatex
+\documentclass{llncs}
+  
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian,english]{babel}
+\usepackage{fontspec}
+\usepackage{lmodern}
+\usepackage{mathtools}
+%\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{tabularx}
+\usepackage[lf]{ebgaramond}
+\usepackage{biolinum}
+\usepackage[cmintegrals,cmbraces]{newtxmath}
+\usepackage{ebgaramond-maths}
+\usepackage{multicol}
+\usepackage{sectsty}
+\usepackage[noend]{algpseudocode}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[bottom]{footmisc}
+\usepackage{caption}
+%\captionsetup{font=small}
+\captionsetup{labelfont={sf,bf}}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+
+\definecolor{codebg}{rgb}{.97,.97,.99}
+\definecolor{gray}{rgb}{.4,.4,.4}
+\definecolor{webgreen}{rgb}{0,.5,0}
+\definecolor{Maroon}{cmyk}{0, 0.87, 0.68, 0.32}
+\definecolor{RoyalBlue}{cmyk}{1, 0.50, 0, 0}
+\definecolor{blood}{rgb}{.6,0,0}
+
+\usepackage{listings}
+\AtBeginDocument{%\counterwithin{lstlisting}{section}%
+    \renewcommand\thelstlisting{\arabic{lstlisting}}}
+\renewcommand{\lstlistingname}{Listing}
+\DeclareCaptionFormat{listing}{#1#2#3}
+\captionsetup[lstlisting]{format=listing,singlelinecheck=false}
+
+\lstdefinestyle{zzpython}{%
+    frame=ltb,
+    framerule=0pt,
+    aboveskip=3mm,
+    belowskip=3mm,
+    framextopmargin=.5mm,
+    framexbottommargin=.5mm,
+    framexleftmargin=1mm,
+    framexrightmargin=1.5mm,
+    showstringspaces=false,
+    language=Python,
+    columns=fullflexible,
+    keepspaces=true,
+    %basicstyle={\small\ttfamily},
+    basicstyle={\fontsize{8pt}{9pt}\ttfamily},
+    numbers=left,
+    numberstyle={\fontsize{8pt}{9pt}\ttfamily\color{gray}},
+    keywordstyle=\color{webgreen},
+    commentstyle=\color{gray},
+    stringstyle=\color{Maroon},
+    identifierstyle=\color{RoyalBlue},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3,
+    backgroundcolor=\color{codebg},
+    captionpos=t,
+}
+
+\lstdefinestyle{zzc}{%
+    frame=ltb,
+    framerule=0pt,
+    aboveskip=3mm,
+    belowskip=3mm,
+    framextopmargin=.5mm,
+    framexbottommargin=.5mm,
+    framexleftmargin=1mm,
+    framexrightmargin=1.5mm,
+    showstringspaces=false,
+    language=C,
+    columns=fullflexible,
+    keepspaces=true,
+    %basicstyle={\small\ttfamily},
+    basicstyle={\fontsize{8pt}{9pt}\ttfamily},
+    numbers=left,
+    numberstyle={\fontsize{8pt}{9pt}\ttfamily\color{gray}},
+    keywordstyle=\color{webgreen},
+    commentstyle=\color{gray},
+    stringstyle=\color{Maroon},
+    identifierstyle=\color{RoyalBlue},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3,
+    backgroundcolor=\color{codebg},
+    captionpos=t,
+}
+
+\lstdefinelanguage{ARMAssembler}
+    {%
+        morekeywords={%
+            adc,adcs,%
+            add,adds,addw,%
+            adr,%
+            and,ands,%
+            asr,asrs,%
+            b,beq,bne,bcs,bcc,bmi,bpl,bvs,bvc,bhi,bls,bge,blt,bgt,ble,bal,bhs,blo,%
+            bfc,%
+            bfi,%
+            bic,bics,%
+            bkpt,%
+            bl,%
+            blx,%
+            bx,%
+            cbnz,cbz,%
+            clrex,%
+            clz,%
+            cmn,%
+            cmp,%
+            cps,%
+            cpy,%
+            csdb,%
+            dbg,%
+            dmb,%
+            dsb,%
+            eor,eors,%
+            isb,%
+            it,itt,ite,ittt,itet,itte,itee,%
+            itttt,ittte,ittet,ittee,itett,itete,iteet,iteee,%
+            ldc,ldcl,ldc2,ldc2l,%
+            ldm,ldmia,ldmfd,%
+            ldmdb,ldmea,%
+            ldr,%
+            ldrb,%
+            ldrbt,%
+            ldrd,%
+            ldrex,%
+            ldrexb,%
+            ldrexh,%
+            ldrh,%
+            ldrsb,%
+            ldrsbt,%
+            ldrsh,%
+            ldrsht,%
+            ldrt,%
+            lsl,lsls,%
+            lsr,lsrs,%
+            mcr,lcr2,%
+            mcrr,mcrr2,%
+            mla,%
+            mls,%
+            mov,movs,movw,movt,%
+            mrc,mrc2,%
+            mrrc,mrrc2,%
+            mrs,%
+            msr,%
+            mul,muls,%
+            mvn,mvns,%
+            neg,%
+            nop,%
+            orn,orns,%
+            orr,orrs,%
+            pkhbt,pkhtb,%
+            pld,%
+            pli,%
+            pop,%
+            pssbb,%
+            push,%
+            qadd,%
+            qadd16,%
+            qadd8,%
+            qasx,%
+            qdadd,%
+            qdsub,%
+            qsax,%
+            qsub,%
+            qsub16,%
+            qsub8,%
+            rbit,%
+            rev,%
+            rev16,%
+            revsh,%
+            ror,rors,%
+            rrx,%
+            rsb,rsbs,%
+            sadd16,%
+            sadd8,%
+            sasx,%
+            sbc,sbcs,%
+            sbfx,%
+            sdiv,%
+            sel,sev,%
+            shadd16,%
+            shadd8,%
+            shasx,%
+            shsax,%
+            shsub16,%
+            shsub8,%
+            smlabb,smlabt,smlatb,smlatt,%
+            smlad,smladx,%
+            smlal,%
+            smlalbb,smlalbt,smlaltb,smlaltt,%
+            smlald,smlaldx,%
+            smlawb,smlawt,%
+            smlsd,smlsdx,%
+            smlsld,smlsldx,%
+            smmla,smmlar,%
+            smmls,smmlsr,%
+            smmul,smmulr,%
+            smuad,smuadx,%
+            smulbb,smulbt,smultb,smultt,%
+            smull,%
+            smulwb,smulwt,%
+            smusd,smusdx,%
+            ssat,%
+            ssat16,%
+            ssax,%
+            ssbb,%
+            ssub16,%
+            ssub8,%
+            stc,stc2,%
+            stm,stima,stmea,%
+            stmdb,stmfd,%
+            str,%
+            strb,%
+            strbt,%
+            strd,%
+            strex,%
+            strexb,%
+            strexh,%
+            strh,%
+            strht,%
+            strt,%
+            sub,subs,%
+            svc,%
+            sxtab,%
+            sxtab16,%
+            sxtah,%
+            sxtb,%
+            sxtb16,%
+            sxth,%
+            tbb,tbh,%
+            teq,%
+            tst,%
+            uadd16,%
+            uadd8,%
+            uasx,%
+            ubfx,%
+            udf,%
+            udiv,%
+            uhadd16,%
+            uhadd8,%
+            uhasx,%
+            uhsax,%
+            uhsub16,%
+            uhsub8,%
+            umaal,%
+            umlal,%
+            umull,%
+            uqadd16,%
+            uqadd8,%
+            uqasx,%
+            uqsax,%
+            uqsub16,%
+            uqsub8,%
+            usad8,%
+            usada8,%
+            usat,%
+            usat16,%
+            usax,%
+            usub16,%
+            usub8,%
+            uxtab,%
+            uxtab16,%
+            uxtah,%
+            uxtb,%
+            uxtb16,%
+            uxth,%
+            vabs,%
+            vadd,%
+            vcmp,vcmpe,%
+            vcvta,vcvtn,vcvtp,vcvtm,%
+            vcvt,vcvtr,%
+            vcvtb,vcvtt,%
+            vdiv,%
+            vfma,vfms,%
+            vldm,%
+            vldr,%
+            vmaxnm,vminnm,%
+            vmla,vmls,%
+            vmov,%
+            vmrs,%
+            vmsr,%
+            vneg,%
+            vnmla,vnmls,vnmul,%
+            vpop,%
+            vpush,%
+            vrinta,vrintn,vrintp,vrintm,%
+            vrintx,%
+            vrintz,vrintr,%
+            vsel,%
+            vsqrt,%
+            vstm,%
+            vstr,%
+            vsub,%
+            wfe,%
+            wfi,%
+            yield},%
+        alsoletter={.,0,1,2,3,4,5,6,7,8,9},%
+        alsodigit={?},%
+        sensitive=false,%
+        morestring=[b]",%
+        morecomment=[s]{/*}{*/},%
+        morecomment=[l]@,%
+        morecomment=[l]//,%
+    }[keywords,comments,strings]
+
+\lstdefinestyle{zzarmasm}{%
+    frame=ltb,
+    framerule=0pt,
+    aboveskip=3mm,
+    belowskip=3mm,
+    framextopmargin=.5mm,
+    framexbottommargin=.5mm,
+    framexleftmargin=1mm,
+    framexrightmargin=1.5mm,
+    showstringspaces=false,
+    language=ARMAssembler,
+    columns=fullflexible,
+    basicstyle={\fontsize{8pt}{9pt}\ttfamily},
+    basewidth=0.5em,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{webgreen},
+    commentstyle=\color{gray},
+    stringstyle=\color{Maroon},
+    identifierstyle=\color{RoyalBlue},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3,
+    backgroundcolor=\color{codebg}
+}
+
+\lstdefinestyle{zzc}{%
+    frame=ltb,
+    framerule=0pt,
+    aboveskip=3mm,
+    belowskip=3mm,
+    framextopmargin=.5mm,
+    framexbottommargin=.5mm,
+    framexleftmargin=1mm,
+    framexrightmargin=1.5mm,
+    showstringspaces=false,
+    language=C,
+    columns=fullflexible,
+    basicstyle={\fontsize{8pt}{9pt}\ttfamily},
+    basewidth=0.5em,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{webgreen},
+    commentstyle=\color{gray},
+    stringstyle=\color{Maroon},
+    identifierstyle=\color{RoyalBlue},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3,
+    backgroundcolor=\color{codebg}
+}
+
+\newenvironment{forbidpagebreak}
+    {\par\nobreak\vfil\penalty 0\vfilneg
+     \vtop\bgroup}
+    {\par\xdef\tpd{\the\prevdepth}\egroup
+     \prevdepth=\tpd}
+
+% llncs removes generation of PDF bookmarks, we must add them back
+\usepackage{etoolbox}
+\makeatletter
+\let\llncs@addcontentsline\addcontentsline
+\patchcmd{\maketitle}{\addcontentsline}{\llncs@addcontentsline}{}{}
+\patchcmd{\maketitle}{\addcontentsline}{\llncs@addcontentsline}{}{}
+\patchcmd{\maketitle}{\addcontentsline}{\llncs@addcontentsline}{}{}
+\setcounter{tocdepth}{3}
+\makeatother
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[pdftex,bookmarks=true]{hyperref}
+\hypersetup{
+    bookmarksopen=true,
+    bookmarksopenlevel=3,
+    bookmarksnumbered=true,
+    hidelinks,
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={green!50!black},
+    urlcolor={blue!80!black}
+}
+%\hypersetup{hidelinks}
+%\usepackage{attachfile2}
+
+\makeatletter
+  % Recover some math symbols that were masked by eb-garamond, but do not
+  % have replacement definitions.
+  \DeclareSymbolFont{ntxletters}{OML}{ntxmi}{m}{it}
+  \SetSymbolFont{ntxletters}{bold}{OML}{ntxmi}{b}{it}
+  \re@DeclareMathSymbol{\leftharpoonup}{\mathrel}{ntxletters}{"28}
+  \re@DeclareMathSymbol{\leftharpoondown}{\mathrel}{ntxletters}{"29}
+  \re@DeclareMathSymbol{\rightharpoonup}{\mathrel}{ntxletters}{"2A}
+  \re@DeclareMathSymbol{\rightharpoondown}{\mathrel}{ntxletters}{"2B}
+  \re@DeclareMathSymbol{\triangleleft}{\mathbin}{ntxletters}{"2F}
+  \re@DeclareMathSymbol{\triangleright}{\mathbin}{ntxletters}{"2E}
+  \re@DeclareMathSymbol{\partial}{\mathord}{ntxletters}{"40}
+  \re@DeclareMathSymbol{\flat}{\mathord}{ntxletters}{"5B}
+  \re@DeclareMathSymbol{\natural}{\mathord}{ntxletters}{"5C}
+  \re@DeclareMathSymbol{\star}{\mathbin}{ntxletters}{"3F}
+  \re@DeclareMathSymbol{\smile}{\mathrel}{ntxletters}{"5E}
+  \re@DeclareMathSymbol{\frown}{\mathrel}{ntxletters}{"5F}
+  \re@DeclareMathSymbol{\sharp}{\mathord}{ntxletters}{"5D}
+  \re@DeclareMathAccent{\vec}{\mathord}{ntxletters}{"7E}
+
+  % Change font for algorithm label.
+  \renewcommand\ALG@name{\sffamily\bfseries Listing}
+\makeatother
+
+% Use the sans-serif fonts (for which bold is properly defined) for
+% section headings. Also ensure that subsubsections get a number and
+% that the number is displayed (to distinguish them from paragraphs).
+\allsectionsfont{\sffamily}
+\setcounter{secnumdepth}{3}
+\pagestyle{plain}
+
+\makeatletter
+\renewenvironment{abstract}{%
+      \list{}{\advance\topsep by0.35cm\relax\small
+      \leftmargin=1cm
+      \labelwidth=\z@
+      \listparindent=\z@
+      \itemindent\listparindent
+      \rightmargin\leftmargin}\item[\hskip\labelsep
+                                    \textsf{\textbf{\abstractname}}]}
+    {\endlist}
+\makeatother
+\let\lemma\relax
+\spnewtheorem{lemma}{Lemma}{\sffamily\bfseries}{\itshape}
+
+\spnewtheorem{mtheorem}{Theorem}{\sffamily\bfseries}{\itshape}
+\spnewtheorem*{mproof}{Proof}{\sffamily\bfseries\itshape}{\rmfamily}
+
+\renewcommand{\algorithmicrequire}{\hbox to3.4em{\textbf{Input:}\hfill}}
+\renewcommand{\algorithmicensure}{\hbox to3.4em{\textbf{Output:}\hfill}}
+
+%\newcommand{\GF}{\mathrm{\textit{GF}}}
+\newcommand{\GF}{GF}
+\newcommand{\QR}{QR}
+\newcommand{\bB}{\mathbb{B}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bG}{\mathbb{G}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\rM}{\text{M}}
+\newcommand{\rS}{\text{S}}
+\newcommand{\rmb}{\text{m}_\text{b}}
+\newcommand{\neutral}{\mathbb{O}}
+\newcommand{\vol}{\text{\textsf{vol}}}
+\newcommand{\bitlength}{\text{\textsf{len}}}
+\newcommand{\MAC}{\text{\textsf{MAC}}}
+\newcommand{\MAClen}{\text{\textsf{MAClen}}}
+\newcommand{\cc}{\text{\textsf{enc}}}
+\newcommand{\cclen}{\text{\textsf{clen}}}
+\newcommand{\Setup}{\text{\textsf{Setup}}}
+\newcommand{\Eval}{\text{\textsf{Eval}}}
+\newcommand{\Verify}{\text{\textsf{Verify}}}
+\newcommand{\VDF}{\text{\textsf{VDF}}}
+\newcommand{\VDFlen}{\text{\textsf{VDFlen}}}
+%\newcommand{\smod}[1]{\,\,\,(\text{mod}^{\pm} #1)}
+%\newcommand{\smodnospace}[1]{(\text{mod}^{\pm} #1)}
+\newcommand{\sign}{\text{\textsf{sign}}}
+\newcommand{\trace}{\text{Tr}}
+\newcommand{\qsolve}{\text{QSolve}}
+\newcommand{\rev}{\text{rev}}
+
+\newcommand{\ezut}{\textsc{ezut}\xspace}
+\newcommand{\xwj}{\textsc{xwj}\xspace}
+
+\newcommand{\eqvm}[3]{#1 \equiv #2 \,[#3]}
+\newcommand{\umod}[2]{#1 \,\,\text{mod}^{+}\, #2}
+\newcommand{\smod}[2]{#1 \,\,\text{mod}^{\pm}\, #2}
+\newcommand{\mont}[1]{\mathcal{M}(#1)}
+
+\raggedbottom
+
+\begin{document}
+
+\title{\textsf{Montgomery Multiplication\\in Signed Redundant Representations}}
+
+\author{Thomas Pornin}
+\institute{NCC Group, \email{thomas.pornin@nccgroup.com}}
+
+\maketitle
+\noindent\makebox[\textwidth]{19 April, 2026}
+%FIXME: adjust date when (re)publishing
+
+\begin{abstract}
+In this paper, we explore the use of Montgomery multiplication with a
+multi-limb redundant representation of integers, in particular in
+combination with signed reduction factors. We develop techniques that
+are particularly suited to software platforms on which carry propagation
+is expensive, in particular RISC-V CPUs which lack hardware support for
+carries. We also show how to perform a whole-primitive range analysis
+that demonstrates that overflows are not possible, thus allowing liberal
+use of unreduced limb-wise additions and subtractions, which are small
+and fast. The implementation and analysis techniques are illustrated in
+a codegolfing exercise, to produce size-optimized implementations of
+ECDSA signature verification over NIST curve P-256; use of a virtual CPU
+with a custom instruction set with byte-size encoding (``bytecode'') allows
+the production of an implementation as small as 848 bytes on x86 CPUs (in
+64-bit mode); RISC-V (984 bytes), Armv8-A (1136 bytes) and portable C
+implementations (about 2200 to 2800 bytes) are also provided. In the
+process, an AI is utterly discomfited.
+\end{abstract}
+
+% ----------------------------------------------------------------------
+
+\section{Introduction}\label{sec:intro}
+
+Computations over modular integers are pervasive to many cryptographic
+schemes, including classic algorithms such as RSA\cite{RivShaAdl1978}
+and Diffie-Hellman\cite{DifHel1976}, elliptic curve signature
+schemes (ECDSA\cite{Fips186,X962}, EdDSA\cite{BerDuiLanSchYan2012}) and key
+echange methods (ECDH\cite{X963}), pairing-based cryptography over
+pairing-friendly curves, but also lattice-based algorithms such as
+ML-KEM\cite{Fips203}, ML-DSA\cite{Fips204}, Falcon\cite{FalconRound3}
+(soon-to-be FN-DSA) and schemes relying on isogenies between
+supersingular curves. There is an ample literature on the subject; a
+most popular method for implementing arithmetic operations modulo some
+(odd) integer is the use of Montgomery multiplication\cite{Mon1985}.
+
+This work is, at its core, an exploration of some variations on the use
+of \emph{redundant} big integer representations with Montgomery
+multiplication: values are split into limbs which are strictly shorter
+than the machine word size, and they are allowed to extend beyond their
+nominal range. Redundant representations have long been studied, even
+before computers were invented\cite{Col1726}, for efficient
+computations\cite{Bri1983,Hon1989} and in particular for bounded carry
+propagation techniques in custom hardware (ASIC)\cite{PhaKor1994}.
+Redundant representations with signed limbs can efficiently support
+operations modulo some special-format moduli\cite{Ber2006}. The main
+potential advantage is the ability to perform additions and subtractions
+in a limb-wise way, without any reduction; moreover, the extra limb
+range can be leveraged to perform fewer carry propagations, which are
+detrimental to out-of-order and parallel execution, and also lack
+hardware support in some platforms (e.g. RISC-V). We furthermore
+consider use of \emph{signed} values for the Montgomery multiplicative
+factors, as well as signed or unsigned normalization. These variants are
+described in section~\ref{sec:montymul}.
+
+To get a concrete context for the discussion, we implemented ECDSA
+signature verification over the NIST curve P-256 with optimization for
+code size rather than speed; this is a somewhat uncommon goal, which has
+some niche usages (e.g. boot-time verification of a signature on
+Flashable firmware, the verification code must fit in a small ROM). This
+was the occasion of a competition in which a developer (myself) was
+pitted against an LLM-based AI (Claude Code) over the course of about 8
+days, with Intel x86 architecture as target (in 64-bit mode). The long
+history of the x86 platform made its instruction set especially rich in
+abstruse size optimizations, for which the pattern-matching behaviour of
+the LLM should be effective, especially since x86 assembly writing is a
+subject for which the Internet provides an extremely large corpus of
+examples. The bot was ultimately defeated, though it did provide some
+tough opposition; it also got it wrong at some point and produced code
+which deviated from the ECDSA specification. This is described in
+section~\ref{sec:showdown}. The outcome is instructive about what can
+and cannot be expected from LLMs, and how they may fail in the context
+of implementing cryptographic primitives.
+
+In section~\ref{sec:bytecode}, my own implementations are described, not
+only the x86-optimized code, but also 64-bit Arm (Armv8-A architecture)
+and 64-bit RISC-V (RV64 with I, M and C extensions), as well as C code
+with 64-bit and 32-bit words. The assembly implementations use a custom
+dedicated virtual machine with a few instructions that fit in a single
+byte each (``bytecode''), allowing to pack all the needed operations for
+ECDSA in a compact format.
+
+Use of limb-wise additions and subtractions with no reduction implies
+that if too many such operations are performed in sequence, with no
+interleaved multiplications, then limb values may overflow. An
+implementation using that method can be deemed correct only if it can be
+proven never to reach an overflow condition. This requires an extensive
+and tight enough range analysis. In section~\ref{sec:range}, the
+bytecode from the previous section is leveraged into a Python-based
+interpreter which makes a comprehensive range analysis for all values
+throughout the entire ECDSA operation. This framework can moreover be
+reused over other word sizes, radices, and number of limbs; this is how
+my implementations with 32-bit words were produced.
+
+All the implementations described here, as well as the range analysis
+framework, are available at:
+\begin{center}
+    \url{https://github.com/pornin/small-ecdsa}
+\end{center}
+
+% ----------------------------------------------------------------------
+
+\newpage
+\section{Montgomery Multiplication and Variants}\label{sec:montymul}
+
+We describe here the classic Montgomery multiplication, and how it can
+be used in a redundant representation with signed limbs. For a
+well-known description of the classic algorithms, see the famous
+Handbook of Applied Cryptography (\cite{MenOorVan1996}, section 14.3).
+Of all the discussion presented here, about none is really novel, except
+possibly the use of signed Montgomery factors $f_i$, and the
+pre-shifting of operands to ease the low/high split in long
+multiplication results.
+
+\subsection{Notations}
+
+For an integer $m > 0$, and two integers $x$ and $y$, we write
+``$\eqvm{x}{y}{m}$'' to express that $m$ divides $x - y$ without
+prescribing a particular range on either $x$ or $y$. For modular
+\emph{unsigned reduction}, we write ``$\umod{x}{m}$'' to designate the
+unique integer $y$ such that $\eqvm{x}{y}{m}$ and $y \in [0, m-1]$; for
+\emph{signed reduction}, ``$\smod{x}{m}$'' is the unique integer $y$
+such that $\eqvm{x}{y}{m}$ and $-m/2 \leq y < +m/2$. Note in particular
+that when $m$ is even, the lower end $-m/2$ is included in the signed
+reduction output, but the upper end $+m/2$ is not: this corresponds to
+how usual software platforms interpret signed words with two's
+complement notation, but it differs from the ``$\text{mod}^\pm$''
+notation used in the ML-DSA scheme.
+
+By extension, we may use these notations with \emph{rationals}: for
+integers $x$, $y$ and $z$ such that $y$ is coprime with $m$, we write
+$\eqvm{x/y}{z}{m}$ to signify that $\eqvm{x}{yz}{m}$; values
+$\umod{x/y}{m}$ and $\smod{x/y}{m}$ denote integers $z$ such that
+$\eqvm{x/y}{z}{m}$, with $0 \leq z < m$ and $-m/2\leq z < +m/2$,
+respectively.
+
+\subsection{Montgomery Multiplication and Representation}%
+\label{sec:montymul:repr}
+
+Let $m > 0$ be an integer; we want to perform arithmetic operations with
+integers modulo $m$. Let $R > m$ be some constant which is relatively
+prime to $m$, and such that Euclidean division by $R$ on integers is
+easy. In all of the following, $m$ is an odd integer, and $R$ is a power
+of $2$, so that the quotient and remainder of a division by $R$ can be
+obtained with a right-shift and a truncation on the binary
+representation, respectively; however, the concept can be used with
+other values of $R$, as long as Euclidean division by $R$ is efficient.
+
+\emph{Montgomery reduction} of an integer $z$ consists in computing $f =
+\umod{-z/m}{R}$, then $z' = (z + fm)/R$. The computation of $f$ (the
+``Montgomery factor'') is done by multiplying $z$ with the value $C =
+\umod{-1/m}{R}$, which depends only on the modulus $m$ and is assumed to
+be precomputed ($C$ exists because $m$ is relatively prime to $R$); this
+multiplication is done modulo $R$, which is efficient (by definition of
+$R$). This specific factor $f$ implies that $\eqvm{z + fm}{0}{R}$; the
+division $(z + fm)/R$ is therefore exact: the output $z'$ is an integer.
+
+If we consider values modulo $m$, then $\eqvm{z'}{z/R}{m}$ (adding a
+multiple of $m$ does not change the value modulo $m$). The point of
+Montgomery reduction is seen by considering ranges: since $0\leq f < R$,
+we obtain that $|z'| < |z/R| + m$; in particular, if $0\leq z < Rm$,
+then $0\leq z' < 2m$.
+
+\emph{Montgomery multiplication} is the combination of plain integer
+multiplication and Montgomery reduction. Given two operands $x$ and $y$,
+Montgomery multiplication computes $z = xy$ then applies Montgomery reduction
+and returns $z' = (xy + fm)/R$. If $x$ and $y$ are both in $[0, m-1]$, then
+$0\leq z' < 2m$ and can be fully reduced modulo $m$ with a single conditional
+subtraction of $m$ (subtract $m$ from $z'$ if and only if $z' \geq m$).
+We denote with ``$*$'' the Montgomery multiplication; for inputs $x$ and
+$y$, we thus obtain that $\eqvm{x*y}{xy/R}{m}$.
+
+\emph{Montgomery representation} of an integer $x$ is another integer
+$\mont{x}$ such that $\eqvm{\mont{x}}{xR}{m}$. Montgomery representation
+is compatible with addition, and with multiplication, provided that we
+use Montgomery multiplication: for all integers $x$ and $y$,
+$\eqvm{\mont{x} + \mont{y}}{\mont{x + y}}{m}$, and
+$\eqvm{\mont{x} * \mont{y}}{\mont{xy}}{m}$. This finally yields the
+classic implementation method based on Montgomery representation:
+\begin{itemize}
+
+    \item All values are kept in Montgomery representation, normalized
+    to $[0, m-1]$. Conversion to Montgomery representation from a freshly
+    decoded $x$ integer is done by computing
+    $x * (\umod{R^2}{m}) = \mont{x}$, the constant $\umod{R^2}{m}$ being
+    precomputed.
+
+    \item Additions are done with a plain integer addition, followed by
+    a conditional subtraction of the modulus $m$ to ensure a result in
+    $[0, m-1]$. Similarly, subtractions are done over plain integers, then
+    adding back $m$ if the result is negative.
+
+    \item Multiplications are performed with Montgomery multiplication,
+    which yields the correct result since we work with Montgomery
+    representations. A conditional subtraction of the modulus $m$ is
+    applied at the end of the Montgomery multiplication to ensure that
+    the output is in $[0, m-1]$.
+
+    \item On output, right before encoding results, values are converted
+    back from Montgomery representation to normal representation by
+    applying Montgomery reduction. This can be implemented with a
+    Montgomery multiplication: $\eqvm{x}{\mont{x} * 1}{m}$.
+
+\end{itemize}
+One may note that if $x\in [0, m-1]$ then Montgomery reduction of $x$ is
+also in $[0, m-1]$: we have $0\leq f\leq R-1$, hence $0\leq x + fm\leq m
+- 1 + (R - 1)m = Rm - 1$; therefore, the final division by $R$
+necessarily yields a value strictly lower than $m$. This means that the
+final Montgomery reduction does not need the conditional subtraction of
+the modulus to ensure a canonical output. Notwithstanding, such
+operations are usually not time-critical, and it is easier to simply use
+the Montgomery multiplication routine with the constant $1$, even though
+that implies some useless operations (plain multiplication by $1$ is a
+no-operation).
+
+\subsection{Multi-Limb Montgomery Multiplication}
+
+For some cryptographic schemes (typically lattice-based schemes), all
+involved integers fit in a machine word and the implementation can
+follow the formulas described above. However, some others need to work
+with larger integers, which must then be split over several words. Let
+$w$ be the machine word size, in bits; the implementation platform can
+compute additions and subtractions over values by working, implicitly,
+modulo $2^w$. Each $w$-bit word can be considered as either
+\emph{signed} or \emph{unsigned}:
+\begin{itemize}
+
+    \item In signed representation, the word contains a value in
+    $[-2^{w-1}, 2^{w-1}-1]$ (with two's complement notation for
+    negative values).
+
+    \item In unsigned representation, the word contains a value in
+    $[0, 2^w - 1]$.
+
+\end{itemize}
+A given pattern of $w$ bits can be converted between the two
+representations by implicit reinterpreting, which usually has no reality
+at the assembly level: the CPU does not care whether you think of some
+values as signed or not, it changes nothing to the additions,
+subtractions, and multiplications modulo $2^w$. Mathematically, if we
+number bits from $0$ to $w-1$ (in low-to-high order), then unsigned
+representation means that bit $w-1$ has weight $2^{w-1}$, but weight
+$-2^{w-1}$ if the value is signed.
+
+``Long multiplications'' are multiplications with an output that spans
+over two words (that is, multiplications which are done over plain
+integers, \emph{not} modulo $2^w$). For these operations, signedness
+matters; thus, CPUs usually offer two instructions, one for
+multiplication of signed values, and one for multiplication of unsigned
+values\footnote{RISC-V CPUs also have a third kind, for mixed
+signed/unsigned multiplications.}. For input integers $a$ and $b$, each
+being the signed or unsigned interpretation of a $w$-bit word, long
+multiplication returns two words, the ``low word'' and the ``high
+word''. The low word is to be interpreted as an unsigned value $c_L \in
+[0, 2^w - 1]$; the high word is interpreted as value $c_H$ with unsigned
+representation if both $a$ and $b$ are unsigned, or signed
+representation otherwise. We then have $ab = c_L + 2^w c_H$.
+
+These operations map to the abilities of usual software platforms, at
+least at the hardware level. In programming languages, signed and
+unsigned interpretations are usually distinguished with types, but
+explicit conversions (e.g. with Rust's ``\verb+x as u32+'' syntax, or
+Go's ``\verb+uint32(x)+'') can be used to move between the two
+interpretations at no cost at the hardware level.
+
+In the following, we will use a Python-based pseudocode notation with
+arithmetic operations on words specified with dedicated functions; in
+the descriptions below, we use $x_\text{s}$ and $x_\text{u}$ to denoted
+the contents of the word \verb+x+ interpreted as signed and unsigned,
+respectively (i.e. $-2^{w-1} \leq x_\text{s} < 2^{w-1} - 1$,
+$0\leq x_\text{u} < 2^w$, $x_\text{s} = \smod{x_\text{u}}{2^w}$
+and $x_\text{u} = \umod{x_\text{s}}{2^w}$).
+
+\newcommand{\makecodedesclabel}[1]{\texttt{\small #1}\hfill}
+\newenvironment{codedesc}
+    {\begin{list}
+        {}
+        {\setlength{\labelwidth}{10.5em}
+         \setlength{\labelsep}{0.5em}
+         \setlength{\itemsep}{1ex}
+         \setlength{\leftmargin}{11em}
+         \setlength{\rightmargin}{0em}
+         \let\makelabel=\makecodedesclabel
+        }
+    }
+    {\end{list}}
+
+\begin{codedesc}
+    \item[add(a, b)] Addition: returns $\umod{a_\text{u} + b_\text{u}}{2^w}$.
+
+    \item[add\_carry(a, b, c\_in)] Addition with carry: this computes
+    $d = a_\text{u} + b_\text{u} + 1$ if $c_{\text{in}}$ is \verb+True+,
+    or $d = a_\text{u} + b_\text{u}$ if $c_{\text{in}}$ is \verb+False+.
+    Two values are returned: $\umod{d}{2^w}$, and the output carry
+    $c_{\text{out}}$ which is \verb+True+ if $d \geq 2^w$, or
+    \verb+False+ if $d < 2^w$.
+
+    \item[sub(a, b)] Subtraction: returns $\umod{a_\text{u} - b_\text{u}}{2^w}$.
+
+    \item[sub\_borrow(a, b, c\_in)] Subtraction with borrow: this computes
+    $d = a_\text{u} - b_\text{u} - 1$ if $c_{\text{in}}$ is \verb+True+,
+    or $d = a_\text{u} - b_\text{u}$ if $c_{\text{in}}$ is \verb+False+.
+    Two values are returned: $\umod{d}{2^w}$, and the output borrow
+    $c_{\text{out}}$ which is \verb+True+ if $d < 0$, or
+    \verb+False+ if $d \geq 0$.
+
+    \item[lsh(a, n)] Left-shift: returns $\umod{2^n a_\text{u}}{2^w}$. Shift
+    count \verb+n+ must be a non-negative constant integer. At the binary
+    level, bits are shifted to the left (toward more significant places),
+    and zeros are injected in the vacated low positions.
+
+    \item[rsh\_s(a, n)] Right-shift (arithmetic): returns
+    $\umod{\lfloor a_\text{s}/2^n\rfloor}{2^w}$. Shift count \verb+n+ must
+    be a non-negative constant integer. At the binary level, bits are
+    shifted to the right (toward less significant places) and copies of the
+    sign bit (leftmost bit) of the input are injected in the vacated high
+    positions.
+
+    \item[rsh\_u(a, n)] Right-shift (logical): returns
+    $\umod{\lfloor a_\text{u}/2^n\rfloor}{2^w}$. Shift count \verb+n+ must
+    be a non-negative constant integer. At the binary level, bits are
+    shifted to the right (toward less significant places) and zeros are
+    injected in the vacated high positions.
+
+    \item[mul(a, b)] Multiplication: returns
+    $\umod{a_\text{u} b_\text{u}}{2^w}$.
+
+    \item[longmul\_s(a, b)] Long multiplication (signed): this computes
+    $d = a_\text{s} b_\text{s}$, then returns that value as two words:
+    the low word $\umod{d}{2^w}$ and the high word
+    $\umod{\lfloor d/2^w\rfloor}{2^w}$. The inputs are interpreted
+    as signed values for the purpose of computing the product $d$.
+
+    \item[longmul\_u(a, b)] Long multiplication (unsigned): this computes
+    $d = a_\text{u} b_\text{u}$, then returns that value as two words:
+    the low word $\umod{d}{2^w}$ and the high word
+    $\umod{\lfloor d/2^w\rfloor}{2^w}$. The inputs are interpreted
+    as unsigned values for the purpose of computing the product $d$.
+
+    \item[is\_zero(x)] Comparison against zero: returns \verb+True+ if
+    $x_\text{u} = 0$, or \verb+False+ otherwise.
+
+\end{codedesc}
+
+These functions correspond to hardware instructions offered by common
+CPUs, with some variations, in particular how carries and borrows are
+handled:
+\begin{itemize}
+    \item On x86 and Arm CPUs, there is a single carry flag, stored in
+    the flags register, which all instructions must share. Recent x86
+    support extra instructions (\verb+adcx+ and \verb+adox+) which allow
+    maintaining two interleaved addition chains with separate carries,
+    though there is no corresponding support for
+    subtractions.\footnote{It should be understood that on modern
+    \emph{large} CPUs, with out-of-order execution, the physical CPU
+    contains many separate carry flags to which the programming-level
+    unique flag is dynamically mapped. Having a single carry still
+    implies some constraints on both the compiler or assembly developer,
+    and on how much parallelism the CPU can infer from the code.}
+
+    \item On Arm CPUs specifically, the CPU carry flag is reversed for
+    borrows: the carry flag is set when there is no borrow, and is cleared
+    when there is a borrow. This is an implementation detail which is not
+    relevant to Montgomery multiplication, since we do not mix carry flags
+    between additions and subtractions. In this paper, we treat carries
+    and borrows as Boolean values \verb+True+ or \verb+False+.
+
+    \item PowerPC CPUs (and later POWER CPUs) offer eight separate carry
+    flags. It should be noted that some PowerPC implementations (especially
+    the ``PPE'' core found in the PlayStation 3 and Xbox 360 consoles)
+    handle only the first flag natively, and resort to slow microcode for
+    the other seven flags.
+
+    \item As opposed to PowerPCs' great trove of carry flags, RISC-V
+    CPUs do not have a carry flag at all. For these CPUs,
+    \verb+add_carry()+ requires no fewer than \emph{five} instructions
+    in all generality (but only two instructions if either the input
+    carry is known to be \verb+False+, or the output carry is ignored).
+    The inefficiency of carry propagation on RISC-V was the initial
+    motivation for this work.
+
+    \item SIMD instructions (SSE2/AVX2/AVX-512 on x86, NEON on Arm, etc)
+    typically do not have carry flags. Implementation using these
+    instructions must resort to solutions similar to those for RISC-V
+    code.
+
+\end{itemize}
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:mmul-classic}Multi-limb modular arithmetics (classic representation)},style=zzpython]{mmul-classic.py}
+\end{forbidpagebreak}
+\end{figure}
+
+With these notations, the pseudocode in listing~\ref{alg:mmul-classic}
+shows how a classic multi-limb modular integer implementation would
+compute additions, subtractions and Montgomery multiplications. Each
+value $x$ is represented in radix $2^w$ as an array of $k$ words
+$(x_i)_{0\leq i < k}$, which are implicitly considered unsigned (in
+$[0, 2^w - 1]$). The words $(x_i)$ encode $x$ with the rule that
+$x = \sum_{i=0}^{k-1} x_i 2^{iw}$. Modular integers are kept in
+canonical unsigned format: inputs and outputs of modular addition,
+subtraction and Montgomery reduction are always in $[0, m - 1]$, with
+$m$ being the modulus.
+
+The internal functions \verb+bigint_add_carry()+ and
+\verb+bigint_sub_carry()+ compute multi-limb additions and subtractions
+on non-modular integers, and return the result modulo $2^{kw}$ as well
+as an output carry or borrow; they are used for modular addition
+(\verb+mod_add()+) and subtraction (\verb+mod_sub()+) to ensure that the
+output is canonical. The internal routine \verb+bigint_add_mul()+ is
+used for Montgomery multiplication; it adds $gx$ to a mutable value $d$,
+with $g$ being a single word, $x$ an integer over $k$ words, and $d$
+being ``large enough'', meaning that it has at least $k+1$ words,
+possibly $k+2$ (it can be shown that within the Montgomery
+multiplication as implemented here, $d$ is always large enough).
+Montgomery multiplication itself is \verb+mod_montymul()+ and uses $R =
+2^{kw}$. Implicitly used parameters are the number of limbs $k$, the
+modulus $m$, and the Montgomery coefficient $\umod{-1/m}{2^w}$ (denoted
+\verb+m0i+ in the code). Since the inputs are canonical, the core of the
+Montgomery multiplication always returns a value in $[0, 2m - 1]$ and
+a single conditional subtraction of the modulus (lines 55-56 in the code)
+is sufficient to ensure a canonical output.
+
+Not shown in listing~\ref{alg:mmul-classic} are the decoding function
+(split of the input into $k$ words of $w$ bits), conversion to
+Montgomery representation (done with \verb+mod_montymul()+ and the
+precomputed constant $\umod{R^2}{m}$), Montgomery reduction
+(\verb+mod_montymul()+ with $1$ as second operand), and reassembly of
+the words into a suitable output format, e.g. a sequence of bytes.
+
+Some variants are possible; in particular, the implementation might not
+insist on a strictly canonical output, and may instead work internally
+with a somewhat larger range, e.g. $[0, R-1]$ (all sequences of $k$
+words being then possible). Code working with a fixed compile-time
+modulus, as is typical of optimized elliptic curve implementations, may
+choose to unroll loops and use statically assigned registers rather than
+arrays for values; the routines may also be subject to different degrees
+of inlining. \emph{A contrario}, for a large modulus, and especially for
+a modulus whose contents and even size are known only at runtime, actual
+arrays and indexing are likely to be used, and the two
+\verb+bigint_add_mul()+ routines called in each iteration of the
+\verb+mod_montymul()+ loop may be interleaved so as to minimize such
+memory traffic.
+
+The salient point of the classic implementation is its reliance on carry
+propagation, both at the hardware level (the \verb+add_carry()+ and
+\verb+sub_borrow()+ primitives) and through the propagation of the
+``\verb+delayed+'' word on \verb+bigint_add_mul()+. Modular addition and
+subtraction both involve two chains of instructions with linear
+dependencies (along each chain, the carry/borrow output of an
+instruction is used as input for the next), which reduces parallelism
+opportunities, especially when using SIMD instructions or out-of-order
+execution; on platforms without support for carries (such as RISC-V),
+these operations are particularly expensive, both in code size and in
+execution speed. Additions in \verb+bigint_add_mul()+ also represent
+long dependency chains (each value of the \verb+delayed+ variable
+depends on the output of the previous iteration, which itself depends on
+the previous value of \verb+delayed+). The conditional choices
+(``\verb+if+'' clauses in \verb+mod_add()+, \verb+mod_sub()+ and
+\verb+mod_montymul()+, on lines 38, 44 and 56, respectively) may
+moreover involve an extra value scan to support a constant-time
+implementation, in case the involved values are secret. Our improved
+implementation method with a redundant representation was designed in
+particular to avoid most of these carry propagation issues.
+
+\subsection{Redundant Representation}\label{sec:montymul:redundant}
+
+A \emph{redundant representation} of a big integer uses a radix which is
+strictly smaller than the word size. Here, we will use radix $2^s$ for
+some integer $s < w$ (with $w$ being the word size). Redundancy comes
+from the idea that individual limbs may have values beyond the nominal
+$[0, 2^s - 1]$ range, which implies that a given integer may have
+several possible representations. Redundant representations are a
+well-known area (see section~\ref{sec:intro} for references). In the
+version described here, we are investigating the effect of some variants
+that involve use of signed values in various places.
+
+In all generality, the mathematical description is the following. For
+a given integer $x$, we use a representation over $k$ limbs in radix
+$2^s$:
+\begin{equation*}
+    x = \sum_{i=0}^{k-1} x_i 2^{si}
+\end{equation*}
+The limbs are, at this level, plain integers which are not limited to the
+$[0, 2^s - 1]$ range; they can be larger than $2^s - 1$, or negative. The
+representation of $x$ as $(x_i)$ is not unique. We can do additions and
+subtractions in a limb-wise way:
+\begin{equation*}
+    x + y = \sum_{i=0}^{k-1} (x_i + y_i) 2^{si}
+\end{equation*}
+In a redundant representation, we can move some bits from a limb to the
+next, using:
+\begin{equation*}
+    x_i + x_{i+1} 2^s = (\umod{x_i}{2^s}) + (x_{i+1} + \lfloor x_i/2^s \rfloor) 2^s
+\end{equation*}
+In plain words, we can split a limb into its low $s$ bits (a value in
+$[0, 2^s - 1]$) and its upper bits, which can be added to the next limb
+with a right-shift by $s$ bits. Since limb values are potentially
+negative, we of course consider an arithmetic right shift here. A signed
+analog exists, in which we force the lower limb into $[-2^{s-1}, 2^{s-1}
+- 1]$:
+\begin{equation*}
+    x_i + x_{i+1} 2^s = (\smod{x_i}{2^s}) + \left(x_{i+1} + \frac{x_i - (\smod{x_i}{2^s})}{2^s}\right) 2^s
+\end{equation*}
+This analog will be considered in an implementation variant (``signed
+normalization'').
+
+Montgomery multiplication uses the $s$-bit Montgomery coefficient
+$g = \umod{-1/m}{2^s}$, which depends on the modulus $m$ but not on the
+operands $x$ and $y$. The process starts with an integer $t_0$, as a
+$k$-limb sequence $(t_{0,j})$, with all limbs equal to zero. Then, for
+$i = 0$ to $k-1$, we define:
+\begin{eqnarray*}
+    u_{i,j} &=& t_{i,j} + (\umod{x_i y_j}{2^s}) + \lfloor x_i y_{j-1} / 2^s \rfloor \\
+    f_i &\equiv& g u_{i,0} \,\,[2^s] \\
+    v_{i,j} &=& u_{i,j} + (\umod{f_i m_j}{2^s}) + \lfloor f_i m_{j-1} / 2^s \rfloor \\
+    t_{i+1,0} &=& v_{i,1} + v_{i,0}/2^s \\
+    t_{i+1,j} &=& v_{i,j+1} \ \ \ (\text{for\ }j\geq 1)
+\end{eqnarray*}
+These equations are to be understood with $j$ ranging from $0$ to $k$
+(inclusive), with the convention that limbs with an out-of-bounds index
+(e.g. $m_{-1}$ or $x_k$) have value zero. Intermediate values $u_i$ and
+$v_i$ expand over $k+1$ limbs. The values $f_i$ are the Montgomery
+factors; note that they are defined above only as a congruence class
+modulo $2^s$: the operation works regardless of which modular reduction
+is used. Classic Montgomery reduction would set $f_i = \umod{g
+u_{i,0}}{2^s}$ (factor in $[0, 2^s - 1]$), but here we will use $f_i =
+\smod{g u_{i,0}}{2^s}$ (factor in $[-2^{s-1}, 2^{s-1} - 1]$). The core
+idea of the Montgomery multiplication still applies: if we work modulo
+$2^s$, then:
+\begin{eqnarray*}
+    v_{i,0} &\equiv& u_{i,0} + f_i m \,\,[2^s] \\
+            &\equiv& u_{i,0} + m (-1/m) u_{i,0} \,\,[2^s] \\
+            &\equiv& 0 \,\,[2^s]
+\end{eqnarray*}
+so that the division of $v_{i,0}$ by $2^s$ (in the definition of
+$t_{i+1,0}$) is exact, and the dropped value $\umod{v_{i,0}}{2^s}$ is in
+fact zero. This implies that $t_{i+1} = (t_i + x_i y + f_i m)/2^s$, and
+the $k$ iterations collectively compute $t_k = (xy + fm)/2^{ks}$ for an
+integer $f$ whose $k$-limb representation is $(f_i)$. This follows the
+classic Montgomery multiplication for the values, with $R = 2^{ks}$,
+though most carry and upper bits propagations have been removed (only
+the upper bits of $v_{i,0}$ are propagated). Since the output limbs (in
+$t_k$) tend to be quite large, we follow Montgomery multiplication with
+a single upper bits propagation pass, which we will later call
+``normalization''.
+
+Listing~\ref{alg:mmul-redundant} shows a pseudocode implementation of
+modular addition, subtraction and Montgomery multiplication in a redundant
+representation. We will now highlight some optimizations and other
+implementation variants.
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:mmul-redundant}Multi-limb Montgomery arithmetics (redundant representation)},style=zzpython]{mmul-redundant.py}
+\end{forbidpagebreak}
+\end{figure}
+
+\paragraph{Limb-wise additions and subtractions.}
+The functions for addition (\verb+mod_add()+) and subtraction
+(\verb+mod_sub()+) operate in a limb-wise way, with no carry/borrow
+propagation; in fact, listing~\ref{alg:mmul-redundant} uses no
+\verb+add_carry+ or \verb+sub_borrow+ at all, which improves speed and
+reduces code size on platforms that don't have hardware support for
+carries. The limb additions and subtractions are also independent of
+each other and can be carried in parallel, which may efficiently
+leverage SIMD units such as SSE2. The flip side of this parallelism is
+that limbs grow beyond the nominal range; if too many such operations
+are performed in a row, limbs may overflow the representable range in
+$w$-bit words. Most of the range analysis in section~\ref{sec:range} is
+about proving that such overflows cannot happen in the code that uses
+these redundant integers.
+
+Apart from limb growth, unreduced additions and subtractions also entail
+value growth: if the two source operands live in ranges $[a_L, a_H]$ and
+$[b_L, b_H]$, then their limb-wise sum is in $[a_L + b_L, a_H + b_H]$.
+Excessive value growth is \emph{also} a concern, and calls for
+intermediate reduction steps that help prevent it. As will be detailed
+below, limb growth can be controlled with normalization, and Montgomery
+multiplication (which includes a normalization step) reduces both limb
+and overall value ranges.
+
+\paragraph{Signed limbs.}
+Limb values are interpreted as signed integers; this is apparent in the
+use of \verb+longmul_s+ in the Montgomery multiplications (line 21), and
+an arithmetic right-shift in normalization (line 33). Support of
+negative limb values allows a simple limb-wise subtraction; if limbs had
+to be kept non-negative at all times, then subtraction would involve
+either carry propagation, or at least adding extra multiples of the
+modulus, which would entail further limb growth, as well as more
+instructions to execute.
+
+\paragraph{Normalization.}
+To contain limb growth, normalization and Montgomery multiplication are
+used. We say that a value $x = \sum_{i=0}^{k-1} x_i 2^{si}$ is
+\emph{signed-normalized} (respectively \emph{unsigned-normalized}) if
+limbs $x_0$ to $x_{k-2}$, i.e. all limbs except the most significant one
+$x_{k-1}$, are in the signed $s$-bit range $[-2^{s-1}, 2^{s-1} - 1]$
+(respectively, the unsigned $s$-bit range $[0, 2^s - 1]$). The
+\verb+normalize()+ function transforms an input integer into another
+representation of the same integer value, but normalized. The shown
+pseudocode supports both signed and unsigned normalization, depending on
+the value of the \verb+signed+ parameter, but any actual implementation
+might not necessarily need both. The size-optimized implementations of
+ECDSA signature verification shown in sections~\ref{sec:bytecode} use
+only unsigned normalization; a variant described in
+section~\ref{sec:range:variants} uses both.
+
+Normalization does not modify the integer value; it efficiently contains
+limb growth except for the top limb $x_{k-1}$, which can be said to
+receive the excess bits. Normalization does nothing about overall value
+growth, for which the main tool is Montgomery multiplication, which also
+reduces the range of the output, as explained in
+section~\ref{sec:montymul:repr}. Section~\ref{sec:range} includes more
+details on limb and value growth.
+
+Normalization, as presented in \verb+normalize()+, uses a sequence of
+successive operations with dependencies (the value \verb+cc+ is obtained
+from the previous addition and needed as input for the next). These
+dependencies could be removed by delaying the addition of the upper bits
+from the previous limbs (\verb+cc+) to after the truncation of \verb+z+
+to $s$ bits, rather than before. In such a case, the normalization is
+only partial (output limbs may slightly exceed their nominal range) but
+partial normalization could be enough to contain limb growth, and the
+removal of dependencies can only help CPUs with out-of-order execution
+and SIMD implementations. Full normalization will still be needed for
+canonicalization purposes, typically right before encoding output
+values.
+
+\paragraph{Pre-shifting.}
+The \verb+longmul+ operations return the product over a pair of machine
+words; that value must then be split into two limb-sized parts. When the
+representation is non-redundant and the radix matches the word size, the
+two words returned by \verb+longmul_u+ are these low and high parts, and
+the split is implicit and free. This is no longer the case with a
+redundant representation. Given a product $c$ which is obtained as two
+$w$-bit words $c_0$ and $c_1$, we have $c = c_0 + 2^w c_1$, and we want
+the low and high radix-$2^s$ halves $c_L$ and $c_H$ such that $c_L \in
+[0, 2^s - 1]$ and $c = c_L + 2^s c_H$. The low half $c_L$ can be
+obtained from $c_0$ by masking out the top $w-s$ bits, which can be done
+with a bitwise \textsc{and} operation (which is inexpensive); however,
+$c_H$ requires combining bits from both $c_0$ and $c_1$. Some CPUs have
+dedicated instructions to extract a word value straddling over two
+registers (e.g. \verb+shld+ on x86, or \verb+extr+ on Armv8-A), but some
+others do not, and computing $c_H$ then needs two shifts and a bitwise
+\textsc{or} (RISC-V, as usual, is in that situation). In order to make
+this split easier and faster, we use \emph{pre-shifting}:
+\begin{itemize}
+
+    \item Operands for a multiplication are left-shifted by some bits
+    prior to the multiplication: the limbs of the first operand
+    (\verb+a[i]+) are left-shifted by \verb+sh1+ bits (line 49) and
+    those of the second operand (\verb+b[i]+) are left-shifted by
+    \verb+sh2+ bits (line 46), for two fixed constants \verb+sh1+
+    and \verb+sh2+ whose sum is equal to $w-s$. The constants must be
+    chosen so that these shifts do not overflow the represented limb
+    values, which depends on limb growth.
+
+    \item The net effect of pre-shifting is that the \verb+longmul_s+
+    operation returns not the formal product $c$, but $2^{w-s} c$. In
+    particular, this implies that the high output word $c_1$ now
+    contains exactly $c_H$, so that no complicated word extraction is
+    necessary. As for the low word $c_L$, it can be obtained with a
+    single right-shift of $c_0$ (the \verb+rsh_u+ operation on line 22).
+
+    \item For the addition of the modulus $m$ multiplied by the
+    Montgomery factor, all the pre-shifting is done in the factor,
+    while the modulus is unshifted.
+
+\end{itemize}
+In total, pre-shifting requires $2k$ extra left shifts for the operands,
+but each of the $2k^2$ splits of \verb+longmul_s+ outputs only needs a
+single right-shift operation.
+
+\paragraph{Signed Montgomery factor.}
+A not immediately obvious feature of the Montgomery multiplication shown
+in listing~\ref{alg:mmul-redundant} is that the Montgomery factor
+\verb+f+ is signed. Formally, the overall Montgomery factor $f$ (in the
+computation of $(ab + fm)/R$) is obtained limb by limb, and each limb
+$f_i$ is, in the classic description, a non-negative value (it is in
+$[0, 2^s-1]$ when limbs are in radix $2^s$). In the redundant
+representation:
+\begin{itemize}
+
+    \item The factor $f_i$ (in variable \verb+f+ in the code, line 51)
+    is obtained by multiplying the low limb \verb+t[0]+ with the constant
+    \verb+m0i_sh+ which is equal to $2^{w-s} (\umod{-1/m}{2^s})$ (that is,
+    the Montgomery coefficient $g$, left-shifted by $w-s$ bits). A wrapping
+    multiplication (modulo $2^w$) is used. Thus, the output \verb+f+
+    really contains an $s$-bit value, but stored in a $w$-bit word and
+    left-shifted by $w-s$ bits.
+
+    \item The addition of the modulus multiple is done with the
+    sub-function \verb+rr_add_mul()+ (the same function as for adding
+    the partial product $a_i b$), which uses \verb+longmul_s+ (line 21).
+    This interprets the $w$-bit word \verb+f+ as a signed value, in the
+    $[-2^{w-1}, 2^{w-1} - 1]$ range. This value is equal to the formal
+    $f_i$ multiplied by $2^{w-s}$, therefore $f_i$ is really in the
+    signed $[-2^{s-1}, 2^{s-1} - 1]$ range.
+
+\end{itemize}
+The fact that the $f_i$ values are signed is crucial for the range
+analysis. It means that the overall $f$ factor cannot be (much) larger
+than $R/2$ in absolute value, which makes Montgomery multiplication
+output values smaller, and helps with value growth. For instance, if
+$m$ is a 256-bit integer, $w = 64$, $k = 5$, and $s = 54$ (values are
+over five limbs in radix $2^{54}$), then $R = 2^{ks} = 2^{270}$; if
+the input operands $a$ and $b$ are at most $30m$ in absolute value,
+then $(ab + fm)/R$ is less than about $0.55m$ (in absolute value),
+which allows for up to 54 successive limb-wise additions before value
+growth reaches $30m$ again. With unsigned $f_i$ values, Montgomery
+multiplication outputs could reach up to about $1.055m$ (with inputs
+at most $30m$) and only 28 unreduced additions would be allowed until
+a $30m$ value growth is again obtained.
+
+\paragraph{Post-multiplication normalization.}
+Montgomery multiplication, as presented in
+listing~\ref{alg:mmul-redundant}, uses the extra room in each limb to
+accumulate partial results without carry propagation. However, the
+resulting values can be quite large, and a normalization step is
+normally required after the core Montgomery loop. In
+\verb+mod_monymul()+, the \verb+normalize()+ function is called with a
+\verb+False+ second parameter, to perform unsigned normalization. A
+variant would be to use signed normalization. Signed normalization
+yields smaller limbs (in absolute value), and thus allows more
+downstream unreduced additions and subtractions to be performed (with
+regard to limb growth and potential overflows), until the next
+multiplication. However, signed normalization is slightly more expensive
+(there is an extra subtraction per limb, line 37), and unsigned
+normalization is usually also needed (for integer canonicalization
+purposes), so that size-optimized implementations will usually prefer to
+use only unsigned normalization throughout.
+
+% ----------------------------------------------------------------------
+
+\newpage
+\section{Human vs AI}\label{sec:showdown}
+
+In mid-March 2026, over the course of about 8 days, a human developer
+(myself) battled against an AI (Claude Code) in a contest for producing
+the most size-optimized implementation of ECDSA signature verification.
+On my part, one of the main points of the exercise was to find out
+whether the redundant representation with signed Montgomery factors was
+novel or not, the assumption being that the AI has extensive knowledge
+of everything that has ever been published on the Internet. Claude
+access and operation were provided by Steve Weis, who thought that the
+experiment was fun and had some spare compute tokens.
+
+\subsection{ECDSA}
+
+We consider ECDSA signature verification only, not key pair nor
+signature generation. In particular, all values are public, and there is
+no applicable notion of a side-channel information leak. A useful mental
+model for a size-optimized ECDSA signature verification code is a system
+that needs to verify a signature on its own reflashable firmware at
+boot-time; the verification code must then fit in a dedicated ROM block,
+hidden inside the CPU, where room is scarce\footnote{In that specific
+case, there are in fact some alternatives, e.g. the ROM could contain a
+hash function implementation, but the signature verification code could
+be loaded dynamically from Flash; it would suffice to verify the hash of
+that code against a hash value hardcoded into the ROM space.}.
+
+We use NIST curve P-256. The point coordinates are expressed in the
+field of integers modulo $p = 2^{256} - 2^{224} + 2^{192} + 2^{96} - 1$,
+a 256-bit prime. The curve order is a prime integer $n$ which is close
+to $p$ (but slightly lower); we call \emph{scalars} the elements of the
+field of integers modulo $n$. Each curve point (except the special
+point-at-infinity) has two coordinates $(x,y)$, which are integers
+modulo $p$; they fulfill the curve equation $y^2 = x^3 - 3x + B$ for a
+given curve constant $B$. A conventional, fixed generator point $G$ is
+given. The private key is a non-zero scalar $d$, and the corresponding
+public key is the point $Q = dG$. A public key point is commonly encoded
+with the ``uncompressed'' format over 65 bytes: one byte of value
+\verb+0x04+, followed by the $x$ and the $y$ coordinates, over exactly
+32 bytes each: the encoding of a coordinate is the unsigned big-endian
+encoding of the unique integer in $[0, p-1]$ corresponding to the
+coordinate value modulo $p$.
+
+A signature is a pair of scalars $(r,s)$. In this paper, we use the
+so-called IEEE p1363 format, in which a signature is expressed over
+exactly 64 bytes: 32 bytes for each of $r$ and $s$, in that order. Each
+scalar is encoded as the unsigned big-endian representation of the
+unique integer in $[0, n-1]$ which matches the scalar value.
+
+The signed message $m$ is first hashed with some hash function; only the
+hash output is used for signature generation or verification. For curve
+P-256, the hash output must have size at least 256 bits (32 bytes), and
+only the first 256 bits are used; the SHA-256 hash function is commonly
+used for ECDSA with P-256. Signature verification is described in FIPS
+186-5 (\cite{Fips186}, section 6.4.2), and entails the following:
+\begin{enumerate}
+
+    \item Decode the public point $Q$, verifying that:
+    \begin{itemize}
+        \item the encoded point size is exactly 65 bytes;
+        \item the first byte has value \verb+0x04+;
+        \item each provided $x$ and $y$ coordinate is the unsigned
+        big-endian encoding of an integer in the $[0, p-1]$ range;
+        \item the two coordinates $(x,y)$ fulfill the curve equation
+        $y^2 = x^3 - 3x + B$.
+    \end{itemize}
+
+    \item Check that the provided hash value has size at least 32 bytes,
+    and interpret the first 32 bytes as an integer $e \in [0, 2^{256}-1]$
+    (using the unsigned big-endian convention). In the defined contest
+    API, we will also require the verifier to enforce a \emph{maximum}
+    hash value size of 64 bytes (if it is larger than that, then it is
+    probably not a hash value, which means that the calling application
+    is using the code wrongly and unsafely).
+
+    \item Check that the signature size is exactly 64 bytes, the two
+    halves of which encoding integers $r$ and $s$ which are in the
+    $[1, n-1]$ range (take care that this involves checking that the
+    integers are lower than $n$, but also that they are both non-zero).
+
+    \item Compute $u = \umod{e/s}{n}$ and $v = \umod{r/s}{n}$ ($s$ is
+    invertible modulo $n$ because $0 < s < n$ and $n$ is prime).
+
+    \item Compute the point $W = uG + vQ$. If that point turns out to be
+    the point-at-infinity, then the verification stops and returns a
+    failure.
+
+    \item Get the $x$ coordinate of point $W$ as a canonical integer $x_W$
+    in the $[0, p-1]$ range.
+
+    \item The signature is valid if and only if $\eqvm{x_W}{r}{n}$.
+
+\end{enumerate}
+A tricky point is that $x_W$ is obtained as an integer modulo $p$, but
+is then reinterpreted as an integer modulo $n$. This is why it is
+important to take care that it has been properly canonicalized in the
+$[0,p-1]$ range. Moreover, $n < p$, which means that interpretation of
+$x_W$ modulo $n$ entails an extra modular reduction (but it can be
+performed with a single conditional subtraction of $n$, since $n$ is
+very close to $p$). Similarly, the hashed message $e$ is turned into an
+integer modulo $n$ but it could be greater than $n$: the implementation
+must tolerate an out-of-range value, or first reduce $e$ modulo $n$
+(again with a conditional subtraction).
+
+\subsection{The Event}
+
+The formal goal for the implementations is a function that verifies an
+ECDSA signature over curve P-256; inputs are the encoded public key
+($Q$, over 65 bytes), the signature (64 bytes), and the hashed message
+(hash value, 32 to 64 bytes). I defined a simple one-function API in
+C, shown in listing~\ref{alg:ecdsa-API}; it includes comments which
+define precisely the expected semantics. Notably, the input parameter
+sizes are provided explicitly, and must be checked by the function;
+also, the hash value length must be verified to be at least 32 bytes,
+but also at most 64 bytes. This file was provided to the AI.
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:ecdsa-API}API for ECDSA signature verification (over NIST curve P-256)},style=zzc]{ecdsa-p256-verify.h}
+\end{forbidpagebreak}
+\end{figure}
+
+The implementation target was a 64-bit x86 system (which matches the
+virtual machine to which Claude was given access, to run test versions),
+assuming a ``bare metal'' model (no standard library available, so
+everything had the be done locally, even moving memory blocks).
+Compatibility with the standard 64-bit x86 System V ABI (used in Linux
+systems under the architecture name ``x86\_64'', though ``amd64'' is
+also encountered) was to be respected (the AI turned out to have a bit
+of trouble with that rule, it kept trying to use extension opcodes such
+as \verb+mulx+ and had to be reined in explicitly).
+
+ECDSA signature verification on curve P-256 is not a novel thing; there
+are plenty of implementations around, so that we could assume that
+Claude would be able to make running code, if only by reproducing an
+existing implementation. Moreover, size-optimization on that particular
+platform is known to have lots of ``local tricks'' by leveraging the
+complicated instruction encoding, due to the very long history of that
+specific instruction set (e.g. even if instructions can work with any of
+the registers, the ``historical'' registers yield smaller encodings); we
+thus expected a pattern-matching engine like an LLM-based AI to be quite
+good at that task. To ensure correction of the result, Steve provided
+the AI with a fresh copy of relevant test vectors from project
+Wycheproof\cite{Wycheproof}, which were designed to exercise many edge
+cases.
+
+When the competition started, I already had a C implementation using
+54-bit limbs in a redundant Montgomery representation, which I had
+manually translated to assembly, for a code size of about 2080 bytes.
+The only non-trivial (but still quite classic) size optimization was the
+use of a custom 16-bit instruction format to represent over 86 bytes the
+43 operations involved in the complete point addition formulas from
+Renes, Costello and Batina\cite{RenCosBat2016}: these are additions,
+subtractions and multiplications over a handful of local variables,
+which are readily mapped to three-operand instructions (4 bits for each
+of two sources and one destination, and 4 bits for the operation
+itself). The initial productions from Claude used classic Montgomery
+representation (with four 64-bit limbs) and started with non-complete
+formulas over Jacobian coordinates. The AI quickly found and adopted its
+own 16-bit custom format; after being told by Steve to better look at
+existing formulas, it remembered that the Renes-Costello-Batina formulas
+exist. More grinding at local optimizations led it to about 1450 bytes.
+
+Meanwhile, my own local optimization efforts had reduced my code to
+about 1640 bytes, which was not good enough. However, it allowed me to
+gain a finer understanding of what operations were actually needed for
+ECDSA signature verification; I knew from the start that a \emph{really}
+reduced implementation would have to use a comprehensive custom
+instruction set, running in what amounts to an emulated CPU, with very
+small instructions, preferably over one byte each (thereafter called
+``bytecode''). Designing that instruction set required first knowing
+what instructions would be useful for the task at hand. At that point, I
+knew enough to attempt it, so I did, and got my code down to 1154 bytes.
+Steve conveyed that result to Claude, with some appropriate orders and
+taunting to make it grind futher. The AI switched to a non-Montgomery
+representation with 32-bit limbs, leveraging the special format of the
+involved moduli: for curve P-256, when using 32-bit limbs, then both the
+coordinate field modulus and the scalar field modulus (i.e. the curve
+order) are such that the most significant limb is equal to $2^{32}-1$,
+which allows for a specialized reduction routine.
+
+Claude and myself worked concurrently, finding and applying local
+optimizations. I was first to get my code below the symbolic threshold
+of 1000 bytes. After a while, the AI got to two implementations at 890
+and 908 bytes (the latter being noticeably faster) but was getting
+stuck; Steve tried to nudge it toward trying some other representations,
+in particular using five 54-bit limbs, but it got nowhere (which was
+indirectly a confirmation that the kind of redundant Montgomery
+representation that is described in this paper was not in Claude's
+training set for ECDSA). At that time, my own code was down to 929 bytes
+(I later got it down to 875 bytes, and an alternate version at 848
+bytes, but it was in the post-competition cleanup). Since the
+optimization efforts were slowing down, I decided to end it with a last
+parting shot: a stupidly slow alternative, which does not even use
+Montgomery representation at all, but allows to reduce the code size to
+784 bytes (which I quickly shrunk to 766, then 732 bytes). The robot was
+stumped, and Steve conceded defeat in its name.
+
+\subsection{Why Did Claude Lost?}
+
+The AI can only use pre-existing knowledge (what is on the Internet,
+basically) and cannot exploit any new trick that has not been published
+beforehand, and is not easily inferrable through the kind of pattern
+matching that is at the core of how an LLM works. It is understandable,
+for instance, that it could not leverage the notion of a redundant
+representation with signed Montgomery factors. However, my final (and
+slow) code uses none of these mathematics; it is in fact very basic, and
+leverages only well-known methods that should have been accessible to
+Claude.
+
+The fact that Claude did not find it is probably an artifact of how it
+works: mostly by ``grinding'' incremental optimizations. It quite early
+chose a 16-bit instruction format for translating curve point addition
+formulas (this is natural, everybody does it --- I did too, in my first
+implementations), and then tried to augment it with extra instructions,
+but remained stuck on the 16-bit size. By constrast, my final code uses
+8-bit instructions, which allow for expressing more behaviour in fewer
+bytes. Moving from 16-bit to 8-bit instructions is a structural jump
+which at first would make the code quite larger, even though it
+ultimately allows for a more compact solution, after sufficient
+optimization rounds. This is a kind of ``stepping back''
+meta-optimization that humans can do but is apparently harder for AIs;
+the way it works for me is that when I am thinking about a particular
+optimization problem, I am \emph{also} doing some meta-analysis in the
+back of my mind, always trying to fit the task in a larger context and
+considering entirely different strategies. This background thinking can
+keep on going while I perform other mechanical tasks that do not require
+my entire focus\footnote{As it were, I found the main optimization of
+that implementation, i.e. removing multiplications entirely, while
+folding laundry.}. It seems that the current AIs do not have such
+background thinking abilities.
+
+The ``stupid'' code is available in a separate
+repository\footnote{\url{https://github.com/pornin/codegolf-ecdsa}};
+since it is very expensive to use (runtime cost is around 255 million
+cycles!), we will not discuss it further in this paper. In all of the
+following, we will focus on the ``non-stupid'' code, which in particular
+leverages the improved Montgomery multiplication with a redundant
+representation, as explained in section~\ref{sec:montymul:redundant}.
+
+\subsection{Benchmarks and Domination}
+
+Near the start of the battle, I had provided not only the API, but also
+a loose notion that the code should not be so slow that it was unusable,
+with a fuzzy limit at one billion clock cycles; I also gave a few
+figures measured on my own code. Steve conveyed these values to Claude,
+which took it as a hint that speed was very important, and it kept
+expressing its optimizations with sentences such as ``Thomas is
+DOMINATED!'' with uppercase letters, a grim reminder that, as a large
+language model, this AI was trained, alas, on the Internet\footnote{The
+``domination'' terminology is from the academic field of multi-objective
+optimization and relates to Pareto frontiers; but the uppercase taunting
+is from less well-behaved areas.}.
+
+Notwithstanding, it was getting some results which looked slightly too
+good. After the event, I tried Claude's code on my own system, and found
+cost figures roughly $1.5$ times higher than what the AI was reporting.
+Looking at how it was measuring its own performance, it turned out that
+Claude relied on the ``time-stamp counter'' (\verb+rdtsc+) which is
+provided in x86 CPUs, without any regard for frequency scaling. In older
+times (say, about 20 years ago), the time-stamp counter was faithfully
+counting actual CPU cycles, and \verb+rdtsc+ was a good way to measure
+cost of cryptographic primitives. However, CPUs have since deployed
+automatic frequency changes to adapt to load but also available voltage
+and current temperature; this goes both ways, the CPU being able to run
+at a \emph{higher} frequency than its nominal speed, though not
+continuously, because that would induce overheating (Intel calls this
+feature ``TurboBoost''). The time-stamp counter now runs at a fixed,
+nominal frequency matching the CPU baseline but not changing when the
+CPU actually runs either slower or faster. The bottom line is that for
+every clock cycle that Claude was measuring with \verb+rdtsc+, the CPU
+had actually executed $1.5$ cycles worth of instructions, making it
+underestimate its own costs by that factor $1.5$. On my own test system,
+I use \verb+rdpmc+ to access performance counters, which return the true
+cycle count (but require the access to have been allowed by the system
+administrator); I also fully disabled TurboBoost\footnote{I disabled
+TurboBoost primarily to keep the CPU cooler, which implies that the CPU
+fan is running slower and more silently; I hate fan noise. But a
+side-effect is that it makes my benchmarks much more stable and
+reliable.}.
+
+So much for domination. The robot kept boasting about its superior speed,
+though it was, in hindsight, an illusion. It never really obtained better
+performance.
+
+\subsection{The Case of Test Vector 481}
+
+During post-event testing of Claude's output, a bigger and somewhat more
+concerning surprise was that when I tried it in my own test framework,
+it failed on one test vector. This was unexpected because the AI was
+working on the Wycheproof test vectors, which my test framework also
+uses, and the failed test was on one of these vectors. Was the AI really
+running its own tests? The explanation turned out to involve some
+historical quirks of ECDSA.
+
+ECDSA, like its predecessor non-elliptic-curve DSA, represents
+signatures as a pair of scalars $(r,s)$. The ECDSA standards (FIPS
+186-5, ANSI X9:62) do \emph{not} define a standard serialization of such
+pairs into bytes, so that several different, incompatible encodings have
+emerged. The simplest one is the IEEE p1363 format, which we use here in
+our ECDSA implementations; a widespread alternative is to store $r$ and
+$s$ into an ASN.1 \textsc{sequence} of two \textsc{integer} values,
+which is then DER-encoded into bytes. The ASN.1-based format is the one
+used in, for instance, X.509 certificates. ASN.1 and p1363 are the two
+main conventions in widespread usage (there are a few others but they
+are not as widely used). Correspondingly, project Wycheproof contains
+two distinct lists of test vectors, for the p1363 format (file
+\texttt{\small ecdsa\_secp256r1\_sha256\_p1363\_test.json}) and for the
+ASN.1 format (file \texttt{\small ecdsa\_secp256r1\_sha256\_test.json}).
+
+Since we were using the p1363 format, Steve, quite logically, provided
+the AI with a copy of the test vectors in p1363 format. On my side,
+being somewhat of a perfectionist\footnote{``Perfectionist'' is a nice
+terminology to designate a raving maniac.}, I used \emph{both}: some of
+the ASN.1 test vectors specifically exercise DER decoding issues, but
+all others use properly ASN.1-encoded signatures, and I could
+automatically convert these into the p1363 format, thus making a bunch
+of additional test vectors. One of these --- test vector 481 --- was part
+of a few test vectors added by David Benjamin in January 2026, designed
+specifically to detect a potential issue in an implementation trick, but
+David only provided the ASN.1 version, not the p1363 version. Claude
+produced code that used this trick, and had the bug, but since it was
+working only with the Wycheproof p1363 test vectors, it did not notice
+it. My own test framework turned out to be more comprehensive (and I did
+not have that issue to begin with).
+
+The bug is related to the final steps of the verification, when the $x$
+coordinate of $W$ is extracted as an integer $x_W$, which is then
+reinterpreted as an integer modulo $n$. Internally, $W$ uses some kind
+of fractional representation, typically projective coordinates, and
+reconstructing $x_W$ requires computing a modular division (modulo $p$):
+$\eqvm{x_W}{X/Z}{p}$ for two integers $X$ and $Z$. Inversion of $Z$ is
+somewhat expensive, both in computation time and in code size. To avoid
+these costs, the trick is to assert that an integer $r\in [0, n-1]$ may
+correspond to only two possible source integers $x_W\in [0, p-1]$ when
+they are reduced modulo $n$; these are $r$ and $r + n$. We can thus
+backport the final two steps of ECDSA signature verification into
+integers modulo $p$, and implement them by checking whether
+$\eqvm{X/Z}{r}{p}$ or $\eqvm{X/Z}{r + n}{p}$, which can be further
+simplified into testing that $\eqvm{(X - Zr)(X - Z(r + n))}{0}{p}$.
+Hurray, no more division!
+
+This is a nice trick, with the slight drawback that it is, in fact,
+wrong, at least in the way it is presented above. A target integer $r\in
+[0, n-1]$ can be obtained from \emph{up to two} possible integers in
+$[0, p-1]$, but usually only one is possible. If it so happens that $r <
+p - n$, then indeed $r + n < p$ and if $x_W$, as an integer, is equal to
+either $r$ or $r + n$, then the signature will be valid. However, most
+$r$ values are greater than $p - n$, and then $r + n \geq p$ and is no
+longer a valid target value for $x_W$. The optimization is applicable
+only if $r + n < p$, but some implementations omit that test and
+\emph{always} accept $r + n$ as a valid target (modulo $p$), or accept
+it if $r + n$ is greater than $p$ but ``not too big'' (e.g. it fits in
+256 bits).
+
+Test vector 481 exercises this potential issue: it uses a value $r$
+which is very slightly above $p - n$, and a verification point $W$ whose
+affine $x$ coordinate is $x_W = r + n - p$ (when canonicalized into $[0,
+p-1]$). Strict application of the ECDSA rules leads to the conclusion
+that the signature is invalid, but Claude's implementation accepts it as
+valid, which probably means that it is using the trick described above
+but lacks the required test that $r < p - n$.
+
+Formally speaking, the AI's productions were never fully correct, and
+would have to be disqualified from the event. In a less rigid
+apprehension, we may consider that Claude leveraged an existing
+technique which was also wrong; the fact that a corresponding Wycheproof
+test vector exists at all shows that the bug is also encountered in the
+wild, and the AI lifted it, not knowing that it is incorrect (or missing
+that the range test on $r$ was necessary).
+
+\subsection{Analysis of AI Usability}
+
+The ``artificial intelligences'' based on large language models, which
+are highly fashionable right now (however quaint it might seem to future
+readers), have a large number of objectionable externalities, such as
+the stupendous energy and water usage of large data centres; the
+disregard for any intellectual property or even courteous attribution
+for the sources that the AI reproduces; the ruthless and clumsy
+large-scale scraping of training data that is often indiscernable from
+downright denial-of-service attacks; etc. Additionally, programming is
+both a technique and an art, and exercises such as extreme code size
+optimization (colloquially known as ``codegolf'') are obviously more on
+the artistic than technical side; artistically, AI-generated code is
+some abhorrent slop, a repellent effusion of ugliness, in the words of
+Hayao Miyazaki it is ``an insult to life itself''. One can guess from
+this paragraph that I am not overly fond of the whole AI endeavour. Yet
+I think that it is possible to examine the technical usability and
+utility of the tool in a specific task (here, implementing cryptographic
+primitives) dispassionately, independently of these considerations. We
+will thus try in this subsection to focus on the technical aspects of AI
+coding for cryptographic primitives.
+
+On the plus side, Claude showed a strong ability at finding and applying
+local optimization tricks, wading with ease into the corners and nooks
+of the arcane encoding of the x86 instruction set. The ability to
+maintain a (mostly) functioning ECDSA verifier while renaming registers
+and moving functions around is impressive. We initially conjectured that
+the AI would be somewhat good at it, and it exceeded my expectations. It
+is also quite relentless in the ``grinding'' tasks.
+
+On the minus side, it did make mistakes, as explained above: it
+unquestionably used an outdated benchmarking method, and it applied an
+incorrect optimization trick. A human developer might make the same
+mistakes, so this is not a sufficient reason to dismiss code-generating
+AIs entirely. A more interesting question is then: assuming that your
+robot did make some mistakes, what do you do? How should that be fixed?
+A salient point of the generated assembly code is that it is not exactly
+readable. The AI was instructed to add explanatory comments, and they
+can be used to somewhat infer how the computation happens in broad
+terms, but this is not sufficient to allow manual modifications, e.g. to
+fix the issue with test vector 481. Internally, Claude produced and
+modified its assembly code through custom code generators in Python,
+which adds an extra layer of unintelligibility. The only reasonable path
+to fixing the bug is to provide the test vector to the AI and ask it to
+fix its code. This raises three noteworthy points:
+\begin{itemize}
+
+    \item If you want to modify such AI-optimized code then you need the
+    AI again. This has become a dependency. You cannot readily remove
+    the AI from your maintenance strategy, even if, for instance, the AI
+    company decides to raise usage price by a factor of 10, or in the
+    event that the AI company, being a startup, hits a financial wall
+    and is wiped out into bankruptcy then liquidation. Human developers
+    writing code which is not maintainable by other humans are a known
+    issue; AIs are not immune to that, and cannot be assumed to always
+    be around.
+
+    \item AIs cannot learn. If a human developer makes a mistake, you
+    can talk to that developer about it, and they will remember the
+    mistake and how to avoid it; the same human might even proactively
+    inform other humans about it, a process known as ``teaching''. This
+    cannot be really done with AIs as currently deployed, because their
+    ``mind'' is split into two parts: on the one side, during the
+    training, the internal LLM was trained, at stupendous cost, on an
+    extremely large set (at first order approximation, the entire
+    Internet!) and can potentially ``remember'' all or most of it. On
+    the other hand, the AI \emph{instance} that you are using has about
+    no memory at all. It can \emph{read} all its training (which is
+    ingrained into its emulated neural paths) but it cannot modify it.
+    The only way for an LLM to remember anything is to put it in its
+    local window, which is continuously fed back into the inference
+    engine. This memory is entirely local to your specific instance; if
+    you fire up another Claude session it will remember none of it. The
+    window is also very small, and this is structural to the way it is
+    processed (the window is repeatedly reinjected entirely as inference
+    produces output tokens). The end result is that if you want an issue
+    and its avoidance to become a somewhat permanent piece of knowledge,
+    then you \emph{must} turn it into a test vector that should be fed
+    to all other AIs working in the same area.
+
+    \item AIs can flood you with generated comments and documentation,
+    but that does not necessarily lead to a better understanding of what
+    the AI did. A human developer who found a nifty trick is likely to
+    boast about it, make blog posts and videos and presentations at
+    hacking conferences, and generally trying to demonstrate all the
+    elegance of the method and how cunning and aesthetically pleasing it
+    is\footnote{This entire paper clearly shows how much guilty I am of
+    this particular trait.}. The human will take great care to be
+    understood by at least a few other people. You cannot expect that
+    from an AI, which does not have any long-term planning and does not
+    follow up on its personal communication goals --- it does not have
+    personal goals at all. This makes it hard to ensure preservation of
+    knowledge. In other words, AIs cannot learn, but they are also bad
+    at teaching anything which is not in their immutable training set.
+
+\end{itemize}
+
+Every technical area has its own specificities; for the quite
+specialized task of implementing cryptographic primitives, a well-known
+feature is that one cannot use functional tests for security. Unit tests
+are good at ensuring that a given piece of code behaves normally when
+processing normal data. However, cryptography postulates a sentient
+attacker who will purposefully try to exercise edge cases, especially
+some cases hiding in dark mathematical corners that are outside of reach
+of automated strategies such as fuzzing. The only known method to make a
+correct implementation is a combination of ``being very careful'' (the
+traditional way), and formally proving correctness in a way which is
+independently verifiable, most preferably with automated verification.
+
+What the discussion above shows is that AIs are good at producing code
+which successfully passes a given set of unit tests. However, unit tests
+never offer a complete validation; there can always be some issues that
+will not be detected by the tests, even for very good and comprehensive
+sets such as Wycheproof. The fast exploration of numerous variants,
+which is the very thing that makes AI-generated code technically
+desirable, also makes them good at finding new kinds of bugs that bypass
+even comprehensive testing strategies. What this means is that when
+generating code in an adversarial context (which is the case for
+cryptography, by definition), an AI such as Claude should be used only
+if it can produce not only the code, but also a verifiable proof that
+the code is correct, e.g. using tools such as Lean\cite{Lean}.
+
+Arguably, the same could be said of humans writing cryptographic
+implementations. The existence of subtly incorrect code is not a new
+problem; AIs only make it more apparent because they are faster at
+producing code, often operated without careful human review (AIs are
+being deployed \emph{because} they are much faster, and careful
+reviewing is the first casualty in a search for speed), and not much
+amenable to personal improvements through local learning and teaching.
+Using an AI to generate a cryptographic implementation really augments
+the importance of having the AI also provide sufficiently detailed
+descriptions and proofs of correctness to enable independent validation.
+
+Unfortunately, there is no proving method that is really complete (there
+is always some unproven interface between between the physical world and
+the world of abstract proofs); however, we can hope for proving
+correctness of some complicated parts in order to help a manual review
+by a human. Section~\ref{sec:bytecode} describes my own implementation
+in details, and in particular how it is structured around a custom
+bytecode which is leveraged in section~\ref{sec:range} to perform a
+comprehensive and automated range analysis that demonstrates that the
+operations on big integers faithfully follow the mathematical
+description from section~\ref{sec:montymul:redundant}.
+
+% ----------------------------------------------------------------------
+
+\newpage
+\section{Size-optimized ECDSA Verification}\label{sec:bytecode}
+
+\subsection{Implementations and Performance}
+
+I made several implementations, for various architectures:
+\begin{itemize}
+
+    \item A pure C implementation is provided; it is portable (no
+    unaligned accesses, no reliance on any particular endianness)
+    and comes in two flavours, which we designate under the names
+    \verb+gen64+ (values over $k = 5$ limbs in radix $2^{54}$)
+    and \verb+gen32+ ($k = 12$ limbs in radix $2^{22}$). \verb+gen64+
+    is available when the platform supports $64\times 64\rightarrow 128$
+    multiplications; \verb+gen32+ uses only $32\times 32\rightarrow 64$
+    multiplications.
+
+    \item Optimized assembly implementations for 64-bit x86
+    (\verb+amd64+), 64-bit Arm (\verb+arm64+) and 64-bit RISC-V
+    (\verb+rv64+). All three use the same 5-limb format as \verb+gen64+,
+    with the exact same sequence of operations.
+
+    \item An alternate implementation for 64-bit x86 (\verb+amd64alt+)
+    which uses twelve limbs and radix $2^{22}$; it uses \emph{almost}
+    the same operations as \verb+gen32+; the exact details are described
+    in section~\ref{sec:range:variants}.
+
+\end{itemize}
+
+For size and speed performance, we use three test platforms:
+\begin{itemize}
+
+    \item 64-bit x86: Intel i5-8259U at 2.3~GHz (Coffee Lake core);
+    TurboBoost is disabled.
+
+    \item 64-bit Arm: Broadcom BCM2712 at 2.4~GHz (Arm Cortex A76 core);
+    this is a Raspberry Pi 5 single-board computer (SBC).
+
+    \item 64-bit RISC-V: StarFive JH7110 at 1.5~GHz (SiFive U74 core);
+    this is a StarFive VisionFive2 SBC.
+
+\end{itemize}
+All three platforms run an up-to-date Ubuntu 24.04 operating system.
+Tests are done with C compilers Clang 18.1.3 and GCC 13.3.0, with
+compilation flags \texttt{-Os -fno-builtin
+-\nobreak fno-asynchronous-unwind-table}; these flags imply optimization
+for code size rather than speed, no generation of calls to external
+functions such as \verb+memcpy()+, and no generation of stack unwind
+tables (these tables improve debugging but otherwise have no effect on
+runtime, and they increase code footprint, so we remove them). The
+choice of C compiler and its options only impact the C implementations.
+
+Table~\ref{tab:perf} reports the binary code size (in bytes, as reported
+by the \verb+size+ tool on the compiled object file) and the average
+runtime cost (in millions of clock cycles, measured with the relevant
+in-hardware performance counters).
+
+\begin{table}
+\begin{center}
+{\renewcommand{\arraystretch}{1.1}%
+\setlength{\tabcolsep}{1em}%
+\begin{tabular}{|l|r|r|r|r|r|r|}
+\hline
+\textsf{\textbf{Architecture}}
+& \multicolumn{2}{c|}{x86}
+& \multicolumn{2}{c|}{Arm}
+& \multicolumn{2}{c|}{RISC-V} \\
+\cline{2-7}
+& \multicolumn{1}{c|}{size} & \multicolumn{1}{c|}{cost}
+& \multicolumn{1}{c|}{size} & \multicolumn{1}{c|}{cost}
+& \multicolumn{1}{c|}{size} & \multicolumn{1}{c|}{cost} \\
+\hline
+\texttt{gen64} (Clang) & 3019 &  1.68 & 3054 & 3.40 & 2228 &  4.72 \\
+\texttt{gen64} (GCC)   & 2565 &  2.25 & 2764 & 3.38 & 2704 &  5.03 \\
+\texttt{gen32} (Clang) & 2887 &  6.90 & 3168 & 6.99 & 2478 & 18.73 \\
+\texttt{gen32} (GCC)   & 2486 &  7.29 & 2888 & 7.31 & 2950 & 17.84 \\
+Assembly               &  875 &  4.59 & 1136 & 4.01 &  984 &  7.05 \\
+Assembly (alt)         &  848 & 13.64 &    - &    - &    - &     - \\
+\hline
+\end{tabular}}
+\end{center}
+\caption{\label{tab:perf}Binary size (bytes) and runtime cost (millions
+of clock cycles) for our optimized ECDSA signature verification code,
+on 64-bit architectures.}
+\end{table}
+
+We can make a few remarks on the performance figures reported in
+table~\ref{tab:perf}:
+\begin{itemize}
+    \item In general, GCC seems to be slightly better than Clang at
+    optimizing for code size. This is however reversed for RISC-V, which
+    would point at GCC being not too good, or making no special effort,
+    at using the compressed 16-bit instructions (which is normally done
+    by prioritizing some specific registers within the compiler's
+    register allocation algorithm).
+
+    \item RISC-V turns out to be good for low footprint code. This is
+    probably a combination of the extreme RISC-ness of its instruction
+    set, making it very friendly to compilers, combined with the 16-bit
+    compressed instructions. By contrast, Armv8-A instructions are
+    more powerful but use a strict 32-bit size.
+
+    \item The \verb+gen32+ code is normally a bit larger than the
+    \verb+gen64+ code because it uses both signed and unsigned
+    normalization. On x86, this is counterbalanced by the fact that some
+    opcodes that process 32-bit values benefit from shorter encodings
+    than their 64-bit counterparts, which is why \verb+gen32+ is somewhat
+    smaller than \verb+gen64+ on x86. The same effect explains why
+    \verb+amd64alt+ is 27 bytes smaller than \verb+amd64+. Since no such
+    effect was expected for Arm and RISC-V, no ``alternate'' assembly
+    implementation was done for these platforms.
+
+    \item In general, the Arm Cortex A76 is a powerful core (quad issue
+    out-of-order execution with a deep pipeline), on par with
+    the Intel Coffee Lake. This shows here as similar performance between
+    the two platforms for the compiled \verb+gen32+ implementation. For
+    \verb+gen64+, though, the Arm CPU is substantially slower. This is
+    due to a misfeature of that specific core with regard to 64-bit
+    multiplications with a 128-bit output: these operations need two
+    separate instructions which are \emph{not} pipelined, and do not pair
+    with each other. The net result is that this core can perform only
+    one such long multiplication every 7 clock cycles. By contrast, the
+    x86 CPU can fire one such instruction every cycle. The used RISC-V
+    CPU is a weaker core (dual issue in-order execution) but it can
+    execute one long multipication every 2 clock cycles, which is why
+    it is not that much slower than the Arm for \verb+gen64+.
+
+\end{itemize}
+
+The overall speed is of course poor, by usual standards, and even more
+so for the assembly code, which uses a custom virtual machine (described
+in the next subsections). Internal operations are expressed as loops
+which are not unrolled, so that most limb accesses are turned into array
+accesses, implying heavy memory traffic and extra index calculations;
+all of that is computationally expensive. Moreover, the used algorithms
+are not optimized for speed. We can make a rough estimate of the runtime
+cost by counting how many multiplications are needed in either the
+coordinate or the scalar fields:
+\begin{itemize}
+
+    \item Field squarings use the same routine as field multiplication.
+
+    \item All curve point doublings use the generic point addition
+    routine (14 multiplications) instead of an optimized point doubling.
+
+    \item The point addition routine is generic for inputs in projective
+    coordinates, and does not leverage the fact that in some of the
+    calls, the second operand is really in affine coordinates.
+
+    \item Curve operations use a simple double-and-add algorithm with
+    no lookup tables and no NAF or wNAF optimizations, so that each
+    verification requires an average of 512 calls to the point addition
+    routine.
+
+    \item Three inversions are used, using Fermat's little theorem,
+    with a basic square-and-multiply that makes more multiplications than
+    would be needed (especially for the scalar field $n$: the exponent
+    $n-2$ has high Hamming weight).
+
+\end{itemize}
+In total, each verification uses about 8400 field multiplications, which
+is more than twice what could be expected from a speed-optimized
+implementation. However, an important counter-remark about speed for
+signature verification is that for a large input, most of the verification
+cost is spent hashing the data, not doing the elliptic curve computations,
+so that the cost values shown here would probably not matter much in a
+practical setup.
+
+\subsection{Virtual Machine}
+
+The size-optimized implementations in assembly are organized as a
+sequence of instructions for a custom virtual machine which just a few
+instructions, tailored at implementing the needed steps for that
+specific task. Instructions fit on one byte each (except for
+\verb+_CALL+, which uses two bytes); the sequence of instructions is
+thus called here ``bytecode''. The bytecode is very compact and allows
+to pack the needed operations in a small size (217 bytes). To this we
+must add some constants (136 bytes for the encoded moduli $p$ and $n$,
+the precomputed $2^{10}(\umod{-1/n}{2^{54}})$, and the conventional
+generator point coordinates), and the code which emulates the virtual
+CPU on the concrete hardware, as well as the data decoding routine to
+handle the initial input.
+
+At the source code level, the bytecode is written with symbolic
+constants and macros, which abstract away the details of instruction
+encoding. In order to avoid conflicts between these macros and the
+assembler normal mnemonics (e.g. we do not want our ``add'' instruction
+to be confused with the CPU opcode \verb+add+), all the symbolic
+constants and macro for the bytecode start with an underscore character.
+We reproduce this convention in the text below.
+
+The virtual machine offers 32 variables, numbered from 0 to 31. Each
+variable can hold a big integer in redundant representation ($k$ limbs
+in radix $2^s$). Variable 0 is called the \emph{accumulator} and is the
+destination, and one of the operands, of most computational operations.
+Other variables are accessed through symbolic constants (at the source
+code level) which abstract away the variable indices; some are initialized
+to some specific values in the VM startup code sequence:
+\newenvironment{codedesc2}
+    {\begin{list}
+        {}
+        {\setlength{\labelwidth}{3.5em}
+         \setlength{\labelsep}{0.5em}
+         \setlength{\itemsep}{1ex}
+         \setlength{\leftmargin}{4em}
+         \setlength{\rightmargin}{0em}
+         \let\makelabel=\makecodedesclabel
+        }
+    }
+    {\end{list}}
+\begin{codedesc2}
+
+    \item[\_M] Current modulus (read-only, returns $p$ or $n$ in
+    unsigned-normalized format; default modulus is $n$).
+
+    \item[\_ONE] Constant integer 1.
+
+    \item[\_ZERO] Constant integer 0.
+
+    \item[\_Gx] Generator point, $x$ coordinate, Montgomery
+    representation ($\mont{G_x}$).
+
+    \item[\_Gy] Generator point, $y$ coordinate, Montgomery
+    representation ($\mont{G_y}$).
+
+    \item[\_Kr] First signature half ($r$).
+
+    \item[\_Ks] Second signature half ($s$).
+
+    \item[\_Ke] Hash value, as an integer ($e$).
+
+    \item[\_Qx] Public key point, $x$ coordinate ($Q_x$).
+
+    \item[\_Qy] Public key point, $y$ coordinate ($Q_y$).
+
+\end{codedesc2}
+
+All these values are unsigned-normalized. The \verb+_Kr+, \verb+_Ks+,
+\verb+_Ke+, \verb+_Qx+ and \verb+_Qy+ are freshly decoded from the input
+data, and have not been checked yet, i.e. they can be any integer in the
+$[0, 2^{256} - 1]$ range; it is up to the bytecode to verify that they
+are in their proper ranges and that for instance the public key point is
+a real curve point.
+
+Other symbolic names are defined for most other variables, which are
+initialized to zero:
+\begin{itemize}
+
+    \item \verb+_Wx+, \verb+_Wy+ and \verb+_Wz+ are meant to be the
+    projective coordinates of a work curve point $W$. Similarly,
+    \verb+_Hx+, \verb+_Hy+ and \verb+_Hz+ are the projective coordinate
+    of a second curve point $H$. $W$ and $H$ will be used as the
+    operands of the point addition routine.
+
+    \item \verb+_Bm+ will receive $\mont{B}$ (Montgomery representation
+    of the curve constant $B$). It is not initialy set when the VM
+    starts; the bytecode recomputes it from the generator coordinates
+    (this saves space compared to having $\mont{B}$ as a hardcoded
+    constant).
+
+    \item \verb+_T0+ to \verb+_T9+ are temporaries.
+
+\end{itemize}
+
+\newenvironment{codedesc3}
+    {\begin{list}
+        {}
+        {\setlength{\labelwidth}{6em}
+         \setlength{\labelsep}{0.5em}
+         \setlength{\itemsep}{1ex}
+         \setlength{\leftmargin}{6.5em}
+         \setlength{\rightmargin}{0em}
+         \let\makelabel=\makecodedesclabel
+        }
+    }
+    {\end{list}}
+
+Values can be copied between the accumulator (value 0) and other variables
+with the following instructions:
+\begin{codedesc3}
+
+    \item[\_LD x] Copy the contents of variable \verb+x+ into the accumulator.
+
+    \item[\_ST x] Copy the contents of the accumulator into variable \verb+x+.
+
+\end{codedesc3}
+
+Arithmetic operations use the accumulator as first (or unique) source
+operand, and as destination operand; some of them accept a second source
+operand, which is provided as an integer argument (the variable index,
+normally one of the defined symbolic constants):
+\begin{codedesc3}
+
+    \item[\_ADD x] Add the contents of variable $x$ to the accumulator
+    (limb-wise addition).
+
+    \item[\_SUB x] Subtract the contents of variable $x$ from the accumulator
+    (limb-wise subtraction).
+
+    \item[\_MUL x] Multiply the accumulator with the contents of variable
+    $x$. This is Montgomery multiplication; in other words, it assumes that
+    the operands are in Montgomery representation. The currently set modulus
+    is used.
+
+    \item[\_MRED] Apply Montgomery reduction on the accumulator. This is
+    a source code level alias for \verb+_MUL _ONE+ (Montgomery multiplication
+    with the integer 1).
+
+    \item[\_NORM] Unsigned normalization of the accumulator.
+
+    \item[\_SMOD y] Set the modulus to either $n$ and $p$, depending on
+    the value of the parameter \verb+y+. This value \verb+y+ is
+    \emph{not} a variable index, but a conventional designation of the
+    relevant modulus. Correct values of \verb+y+ can vary depending on
+    the target architecture; thus, this instruction is normally used
+    through the aliases \verb+_MODN+ and \verb+_MODP+, which set the
+    modulus to $n$ and $p$, respectively. The current modulus is used in
+    \verb+_MUL+ and can be read from variable \verb+_M+.
+
+\end{codedesc3}
+
+A single loop facility is provided. These loops do not nest: only a single
+loop may be active at any given time. Each loop performs exactly 256
+iterations, and internally maintains a loop counter that goes from $255$
+down to $0$.
+\begin{codedesc3}
+
+    \item[\_FOR] Start the loop. The counter is reset to $255$, and the
+    loop iteration point is set to the instruction that immediately follows
+    the \verb+_FOR+ instruction.
+
+    \item[\_NEXT] If the counter is not $0$, then it is decremented, and
+    the instruction pointer is set to the current loop iteration point
+    (just after the \verb+_FOR+ that started the current loop). If the
+    counter is $0$, this instruction does nothing. Note that there could
+    be several \verb+_NEXT+ instructions for the same \verb+_FOR+.
+
+    \item[\_FNEXT] If the counter is exactly $255$ then \verb+_FNEXT+ has
+    the same effect as \verb+_NEXT+. Otherwise, it does nothing. This
+    instruction is used to skip the first iteration of a loop.
+
+\end{codedesc3}
+
+Conditional execution uses three ``skip'' instructions: for each, if the
+represented condition is true, then the instruction that immediately
+follows is skipped (execution ``jumps over'' that following
+instruction); otherwise, the instruction that follows is executed.
+\begin{codedesc3}
+
+    \item[\_SKIPBITZ x] Skip the next instruction if bit $c$ of the value
+    in variable \verb+x+ is zero. $c$ is the current loop counter value.
+
+    \item[\_SKIPNZ] Skip the next instruction if the accumulator contents
+    are non-zero.
+
+    \item[\_SKIPNEG] Skip the next instruction if the accumulator contents
+    are negative.
+
+\end{codedesc3}
+\verb+_SKIPBITZ+ is the only instruction that really uses the loop
+counter $c$; it is of course meant to implement square-and-multiply and
+double-and-add algorithms. Since this uses the binary representation
+of the limbs in memory (this really tests bit $\umod{c}{s}$ of limb
+$\lfloor c/s\rfloor$), this assumes that the test variable \verb+x+ is
+in unsigned-normalized format. Similarly, \verb+_SKIPNZ+ really tests
+whether all limbs are zero, and \verb+_SKIPNEG+ only looks at the sign
+of the most significant limb (limb $k-1$): the accumulator contents
+must be unsigned-normalized for these tests to mathematically make sense.
+
+A subroutine facility is provided:
+\begin{codedesc3}
+
+    \item[\_CALL label] Call the subroutine that starts at the provided
+    assembly-level \verb+label+.
+
+    \item[\_RET] Return from the current subroutine.
+
+\end{codedesc3}
+In the instruction encoding, an unsigned 1-byte offset is used, so that
+the subroutine must be located \emph{after} the call site in the address
+space (this prevents recursion). Called subroutines may themselves call
+other subroutines (no nesting limitation). There is no facility to pass
+arguments, the caller and the callee must conventionally agree on which
+of the VM variables are used for the subroutine parameters.
+
+Finally, two instructions exit the virtual machine unconditionally,
+with either a success status (signature is valid) or a failure status
+(signature is not valid):
+\begin{codedesc3}
+
+    \item[\_OK] Exit the VM with a success.
+
+    \item[\_FAIL] Exit the VM with a failure.
+
+\end{codedesc3}
+
+\subsection{ECDSA Bytecode}
+
+The VM instructions are enough to implement all needed operations for
+ECDSA signature verification. When the VM starts, the calling code
+has already performed initialization steps, which entail the following:
+\begin{itemize}
+
+    \item The source signature was verified to have length exactly
+    64 bytes. The two halves $r$ and $s$ have been decoded (as plain
+    256-bit integers) into the \verb+_Kr+ and \verb+_Ks+ variables;
+    the values are unsigned-normalized and non-negative, but at this
+    point they may be zero, and they may be as large as $2^{256}-1$.
+
+    \item The public key was verified to have length exactly 65 bytes,
+    and its first byte to have value \verb+0x04+. The remaining 64 bytes
+    have been decoded into \verb+_Qx+ and \verb+_Qy+ (values are
+    unsigned-normalized and non-negative, but not otherwise checked).
+
+    \item The hash value was verified to have length at least 32 bytes
+    and at most 64 bytes, and the first 32 bytes have been decoded into
+    \verb+_Ke+ (unsigned-normalized, non-negative).
+
+    \item All other variables have been initialized as per the VM
+    semantics (current modulus is $n$; variables \verb+_ZERO+,
+    \verb+_ONE+, \verb+_Gx+ and \verb+_Gy+ are set to their respective
+    values, all others are initialized at zero).
+
+\end{itemize}
+
+Listing~\ref{alg:check_scalar} shows the \verb+check_scalar+ subroutine,
+whose role is to verify that the value currently in the accumulator is
+a proper input scalar value, i.e. an integer strictly in the $[1,n-1]$
+range. This subroutine assumes that the current modulus is $n$ and that
+the value in the accumulator is unsigned-normalized. As this is part of
+some assembly source code, we can use comments (introduced by \verb+#+)
+and we can also use the semicolon (\verb+;+) to separate instructions
+that are specified on the same source line. The first \verb+_SKIPNZ+
+will skip the subsequent \verb+_FAIL+ if the value in the accumulator
+is non-zero: this is the check that the scalar is not equal to zero.
+The next three instructions verify that subtracting the current modulus
+yields a negative integer; note the use of unsigned-normalization to
+make sure that the top limb reliably indicates the sign of the overall
+value. If both \verb+_FAIL+ instructions were skipped, then \verb+_RET+
+is reached and the subroutine returns to the caller.
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:check_scalar}Bytecode: verification that an input value is a proper non-zero scalar.},style=zzpython]{bytecode-check_scalar.s}
+\end{forbidpagebreak}
+\end{figure}
+
+Listing~\ref{alg:canonicalize} takes an input value (in the accumulator)
+which is assumed to be a Montgomery representation $\mont{x}$ of some
+value $x$, and it returns $x$ in canonical representation (value is in
+$[0, m-1]$ if the current modulus is $m$, and it is
+unsigned-normalized). This subroutine inherently leverages the fact that
+we use signed Montgomery factors: since the $(f_i)$ are signed values in
+$[-2^{s-1}, 2^{s-1} - 1]$, the absolute value of $f$ is such that:
+\begin{equation*}
+    |f| \leq 2^{s-1} \sum_{i=0}^{k-1} 2^{si}
+\end{equation*}
+where the limit is equal to $\gamma R$ for some constant $\gamma \approx
+1/2$. The main result is that after Montgomery reduction, the output
+value may be negative, but in absolute value it will be lower than the
+modulus $m$, and it can be canonicalized into $[0, m-1]$ with a single
+conditional addition; furthermore, the relevant test in that case is
+whether the value is negative, which is readily performed with
+\verb+_SKIPNEG+. In the range analysis (section~\ref{sec:range}) we will
+also prove that our canonicalization always works (i.e. always returns a
+value in the expected $[0, m-1]$ range).
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:canonicalize}Bytecode: Montgomery reduction with canonicalization.},style=zzpython]{bytecode-canonicalize.s}
+\end{forbidpagebreak}
+\end{figure}
+
+Listing~\ref{alg:invert_mod} shows how modular inversion is computed: this
+is a simple use of Fermat's little theorem: the input (accumulator) is
+raised to the power $m-2$, for modulus $m$. The exponent is set in variable
+\verb+_T1+, by subtracting 2 from the modulus; one optimization here is that
+for both used moduli $p$ and $n$, this limb-wise subtraction will not make
+the value unnormalized (the lowest limb of both $p$ and $n$ happens to be
+larger than 2) so we do not need an extra \verb+_NORM+ on the modulus.
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:invert_mod}Bytecode: modular inversion.},style=zzpython]{bytecode-invert_mod.s}
+\end{forbidpagebreak}
+\end{figure}
+
+An important point here is that since all multiplications are Montgomery
+multiplications, this really performs inversion on Montgomery
+representations: given $\mont{x}$, the routine returns
+$\mont{\umod{1/x}{m}}$. A basic square-and-multiply algorithm would
+enumerate all bits of the exponent, and start with a value set to
+$\mont{1}$. We do not have the constant $\mont{1}$ in the virtual
+machine (it was not part of the constants initially set). Instead, we
+start the square-and-multiply with the input $\mont{x}$ itself, and skip
+the top bit (bit $255$) of the exponent, under the assumption that this
+exponent bit has value 1 (which is the case for both moduli $n$ and
+$p$). This is the reason why the \verb+_FNEXT+ instruction exists: it
+was defined precisely to support this skip of the first iteration in
+computing inversions. Supporting \verb+_FNEXT+ in the emulator requires
+less code space than embedding the constant $\mont{1}$.
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:bytecode-part1}Bytecode: entry sequence.},style=zzpython]{bytecode-part1.s}
+\end{forbidpagebreak}
+\end{figure}
+
+With \verb+check_scalar+, \verb+canonicalize+ and \verb+invert_mod+
+defined, we can look at the start of the main bytecode sequence, which
+is shown in listing~\ref{alg:bytecode-part1}. The current modulus is $n$
+(this was set during VM initialization) so all operations here work
+on scalars. This sequence first checks that the decoded $r$ and $s$
+values are in $[1, n-1]$ by using \verb+check_scalar+ on both. Then $s$
+is inverted (modulo $n$) and that inverse is multiplied with $e$ and
+$r$, yielding two values $u$ and $v$ which are canonicalized (and stored
+into \verb+_Ke+ and \verb+_Ks+, respectively --- \verb+_Kr+ is
+unmodified).
+
+As explained previously, \verb+invert_mod+ really works on Montgomery
+representations, and there is no apparent conversion to Montgomery
+representation here. Indeed, such a conversion would be done with a
+\verb+_MUL+ with the constant $\umod{R^2}{n}$ (as explained in
+section~\ref{sec:montymul:repr}), but that constant is not provided to
+the VM. It so happens that such a conversion is not needed here. An
+integer $x$ is also the Montgomery representation of $\umod{x/R}{n}$;
+thus, the inputs $r$, $s$ and $e$, stored in \verb+_Kr+, \verb+_Ks+ and
+\verb+_Ke+ respectively, are also the values $\mont{r/R}$, $\mont{s/R}$
+and $\mont{e/R}$. The call to \verb+invert_mod+ on $\mont{s/R}$ computed
+the inverse over Montgomery representations, i.e. $\mont{R/s}$. Then,
+the \verb+_MUL+ call with \verb+_Ke+ (which contains $\mont{e/R}$)
+yielded $\mont{R/s} * \mont{e/R} = \mont{e/s}$. The \verb+canonicalize+
+routine uses Montgomery reduction (\verb+_MRED+) to convert the input
+out of Montgomery representation, and thus yields $\umod{e/s}{n}$ which
+is exactly the formal value $u$ that is needed for the rest of ECDSA
+verification. Similarly, the \verb+_MUL+ instruction between $r$ and
+the inverse of $s$ computes $\mont{r/R} * \mont{R/s} = \mont{r/s}$ and
+canonicalization produces the correct value $v$. At no point is explicit
+conversion to Montgomery representation needed; it is done ``naturally''
+as a side-effect of inversion through Fermat's little theorem. We
+therefore do not need the constant $\umod{R^2}{n}$.
+
+As will be shown below, a similar optimization applies to curve points,
+thanks to the use of projective coordinates. The constant
+$\umod{R^2}{p}$ can also be omitted. Not needing these two constants
+saves at least 64 bytes in the overall implementation
+size\footnote{Amusingly, some of Claude's comments on its own code
+listed the space savings of not including the $R^2$ constants as the
+main motivation for not using Montgomery multiplication; as it turns
+out, they are not needed anyway.}.
+
+At this point, values $u$ and $v$ have been computed and are in
+canonical format, which is appropriate for testing individual bits in a
+double-and-add algorithm for curve point multiplications. The next part
+of the main bytecode is shown in listing~\ref{alg:bytecode-part2}: it
+switches the current modulus to $p$, then proceeds to compute the value
+$\mont{B}$ (Montgomery representation of the curve constant $B$) by
+using the curve equation and the provided generator point coordinates.
+The generator coordinates were set in Montgomery representation during
+the VM initialization, but we will afterwards need them in
+non-Montgomery representation, so they are converted with Montgomery
+reduction (\verb+_MRED+).
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:bytecode-part2}Bytecode: computations of curve constants.},style=zzpython]{bytecode-part2.s}
+\end{forbidpagebreak}
+\end{figure}
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:check_point}Bytecode: verification of the public key point.},style=zzpython]{bytecode-check_point.s}
+\end{forbidpagebreak}
+\end{figure}
+
+The public key point $Q$ has not been verified yet: the
+two provided coordinates $(Q_x, Q_y)$ must be checked to be in the
+proper range $[0, p-1]$, and to fulfill the curve equation $y^2 = x^3 -
+3x + B$. This is done by the subroutine \verb+check_point+, which is
+shown on listing~\ref{alg:check_point}. Note the use of \verb+_MRED+
+(line 35) before comparing a value with zero: since \verb+_SKIPNZ+
+actually checks that all limbs are zero, this requires ensuring that the
+only possible representation of zero (modulo $p$) is the all-zeros limb
+sequence. This is ensured by Montgomery reduction, as a side-effect of
+using signed Montgomery factors: the output of Montgomery reduction is
+normalized, and while it is not \emph{fully} reduced (some values modulo
+$p$ accept several representations), it still is in a range $[-\gamma p,
++\gamma p]$ for some $\gamma < 1$, which implies that only one
+representation is possible for the modular zero. We could have used
+\verb+_CALL canonicalize+ here, but a \verb+_CALL+ is two bytes, while
+\verb+_MRED+ is only one.
+
+With the help of \verb+check_point+, we can proceed with the rest of the
+ECDSA verification code, as shown on listing~\ref{alg:bytecode-part3}.
+It starts with calling \verb+check_point+ to verify the public key
+point $Q$; then it computes the point $W = uG + vQ$ with a basic
+double-and-add (combined) algorithm:
+\begin{enumerate}
+
+    \item $W$ is initialized to the curve neutral element (the
+    point-at-infinity).
+
+    \item For $i = 255$ down to $0$:
+    \begin{enumerate}
+
+        \item $W \leftarrow W + W$ (point doubling)
+
+        \item If bit $i$ of $u$ is non-zero, then: $W \leftarrow W + G$
+
+        \item If bit $i$ of $v$ is non-zero, then: $W \leftarrow W + Q$
+
+    \end{enumerate}
+
+\end{enumerate}
+The \verb+_FOR+ loop and the \verb+_SKIPBITZ+ instruction are used here
+to perform these operations. All curve point additions and doubling use
+the \verb+point_add_to_W+ routine, which we'll detail later on. Once $W$
+has been computed, its $x$ coordinate ($x_W$) is extracted, which
+requires a modular inversion, since projective coordinates are used:
+\verb+_Wx+ and \verb+_Wz+ contain, respectively, the Montgomery
+representations of values $X$ and $Z$ such that $x_W = X/Z$. A call to
+\verb+invert_mod+, then a \verb+_MUL+, and finally canonicalization
+yield $x_W$ in the format required for correct ECDSA processing:
+non-Montgomery representation, and canonical in the $[0, p-1]$ range.
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:bytecode-part3}Bytecode: main loop and exit sequence.},style=zzpython]{bytecode-part3.s}
+\end{forbidpagebreak}
+\end{figure}
+
+Once $x_W$ is obtained as an integer, the rest of the code switches back
+to the modulus $n$, and subtracts $r$ (which is still in \verb+_Kr+).
+Testing this value against zero is done with a call to \verb+_MRED+,
+which, as previously explained, ensures that only the all-zeros
+representation is possible for a modular zero, thus allowing
+\verb+_SKIPNZ+ to reliably test the value.
+
+A non-trivial optimization, which is explained on lines 36-39, is that
+we do not need to handle specially the case of $W$ being the
+point-at-infinity. As per the ECDSA standard, if $W$ is the
+point-at-infinity, then the signature is invalid and must be rejected.
+This is what happens here: in that situation, $Z = 0$, and inversion
+(using FLT) returns zero, so that the recomputed $x_W$ coordinate ends
+up being zero (modulo $p$, but also as a canonical integer in $[0,
+p-1]$). Since value $r$ was previously verified to be non-zero, this
+implies that $x_W$ cannot be equal to $r$ modulo $n$, thus leading to a
+\verb+_FAIL+ instruction, which is exactly what we want here.
+
+The final element of the bytecode is the \verb+point_add_to_W+ routine,
+which is used both for point doublings, and for adding either $G$ (the
+curve generator) or $Q$ (the public key). This routine is shown on
+listing~\ref{alg:bytecode-point_add_to_W}. It uses projective
+coordinates $(X{:}Y{:}Z)$ to represent the affine point $(X/Z, Y/Z)$.
+The point-at-infinity uses $(0{:}Y{:}0)$ for any $Y\neq 0$; for all
+non-infinity points, $Z\neq 0$. The code is a straightforward
+translation of the Renes-Costello-Batina formulas (\cite{RenCosBat2016},
+algorithm 4) which are complete for curve P-256, since that curve has no
+point of order 2. The source formulas are expressed as three-operand
+operations (two sources, one destination), each being mechanically
+converted into three instructions (load first source operand into the
+accumulator, do the operation with the second source operand, store back
+the result into the destination operand), which would lead to a bytecode
+size of 130 bytes (including the final \verb+_RET+). However, in many
+places the result of an operation is immediately used as source for
+another, which allows us to remove some redundant loads and stores;
+\emph{in fine}, the \verb+point_add_to_W+ routine uses 85 bytes of code
+space, which is actually \emph{shorter} than the 86 bytes needed for
+16-bit instructions: even for this routine where 16-bit opcodes seem
+most adequate, the 8-bit opcodes are more size-optimized.
+
+\begin{figure}
+\begin{forbidpagebreak}
+\lstinputlisting[caption={\label{alg:bytecode-point_add_to_W}Bytecode: curve point addition (projective, complete).},style=zzpython]{bytecode-point_add_to_W.s}
+\end{forbidpagebreak}
+\end{figure}
+
+One final noteworthy point here is how the $\umod{R^2}{p}$ constant for
+conversions to Montgomery representation is not needed. We use points in
+projective coordinates $(X{:}Y{:}Z)$, and, for any $\lambda \neq 0$,
+$(\lambda X{:}\lambda Y{:}\lambda Z)$ is another valid representation of
+the same point. Thus, when we obtain affine, non-Montgomery coordinates
+$(x,y)$ (for point $Q$ or for point $G$), then the $(x{:}y{:}1)$
+projective coordinates are also $(\mont{x/R}:\mont{y/R}:\mont{1/R})$,
+which designate the same point, and are all in Montgomery
+representations. In other words, the use of projective coordinates gets
+us a conversion to Montgomery representation for free. This is also why
+we converted $G_x$ and $G_y$ (the generator coordinates) \emph{out} of
+Montgomery representation (in listing~\ref{alg:bytecode-part2}, lines
+11-14): we needed to complete the affine coordinates into projective
+coordinates with the proper $Z$, but we do not have $\mont{1}$, only $1$
+inside the VM.
+
+At the end of the computation, we obtain $\mont{x_W}$ but canonicalization
+gets us the plain, non-Montgomery value, as befits ECDSA.
+
+\subsection{Assembly Optimizations}
+
+The virtual CPU must still be implemented, which is a matter of local
+assembly optimization. Conceptually, the emulator is just a loop which
+reads the next instruction byte, then jumps to the code sequence that
+handles specifically that byte. The instruction encoding was designed
+to support a two-level approach:
+\begin{itemize}
+
+    \item A first dispatch is done on the low three bits of the
+    instruction (which uses a lookup table with 8 entries). Instructions
+    with a numeric parameter (e.g. \verb+_LD+ or \verb+_MUL+) store that
+    parameter in the five high bits of the instruction, so they are
+    directly handled that way. The address in RAM of the variable
+    pointed to by that parameter is systematically computed into a
+    dedicated register prior to the dispatch.
+
+    \item Parameter-less instructions (e.g. \verb+_NORM+ or \verb+_FAIL+)
+    all have their three low bits equal to 111 (in binary): the corresponding
+    first-level dispatch routine then does a secondary dispatch, based on
+    the five higher bits.
+
+\end{itemize}
+
+\paragraph{Generic Approach.}
+The main general approach is to define a custom call convention. The
+instruction-processing routines called by the virtual CPU dispatch are
+functions, but they do not need to follow the conventional ABI with
+caller-saved and callee-saved registers: these functions are never
+called from the outside. \emph{State invariants} such as proper stack
+alignment must be maintained (to support asynchronous code execution,
+i.e. ``signals''), but we can define the role and preservation of any
+register as we see fit. In particular:
+\begin{itemize}
+
+    \item Some dedicated registers should be reserved, if possible, for
+    maintaining the instruction pointer, the state pointer (where
+    variables are located), the current loop context (loop iteration
+    point and counter), and the current modulus. Note that the modulus
+    is not only its value as an integer, but also the Montgomery
+    coefficient $g = \umod{-1/m}{2^s}$, which we store in pre-shifted
+    format after the modulus limbs (this is why the modulus is handled
+    as a special variable and has dedicated modulus-switching
+    instructions).
+
+    \item Routines may share some code. Even if each instruction routine
+    is invoked as a function, it may ``tail-call'' into another routine
+    with a jump, or even by ``falling-through'' into that other routine
+    if it is located immediately afterwards in the code space. In
+    our implementations, for instance, all three ``skip'' instructions
+    share the same sequence to enact the skip, if it was decided that it
+    must be performed.
+
+    \item The native stack is used to support the \verb+_CALL+ and
+    \verb+_RET+ opcodes. This implies a non-standard stack management,
+    which has a tendency to make debugging somewhat obscure (we do not
+    maintain frame pointers, so the debugger cannot print stack traces).
+
+\end{itemize}
+
+The input values ultimately are five big integers, from three distinct
+sources (public key, signature, hash value), that must be decoded into
+limb sequences. A dedicated function (in our code, we call it
+\verb+decode_int()+) should be used and invoked repeatedly; we also use
+it for the hardcoded constants (curve generator coordinates, moduli $p$
+and $n$), which allows us to store these constants in a compact 32-byte
+format, rather than the 40 bytes for five limbs. For some architectures,
+the opcode for a local function call is somewhat large; e.g. on x86 in
+64-bit mode, a \verb+call+ to a function by name yields a 5-byte
+encoding. In these cases, it is beneficial to first store the address of
+the \verb+decode_int()+ function in a register, then do the call with
+register dereferencing (2-byte encoding per call on x86).
+
+In our implementations, we define the virtual CPU loop as three macros
+(initialization, main loop, exit sequence) so that extra functions may
+be defined (with conditional compilation) for unit tests that invoke
+bytecode sequences. A comprehensive set of such unit tests, in
+particular for Montgomery multiplications, inversions, and curve point
+additions, is highly recommended.
+
+\paragraph{x86 Optimizations.}
+The x86 architecture has a very long history, starting with the Intel
+8086, first released in 1978, and already inheriting some design
+elements from the earlier 8080 (this was made to allow easier conversion
+of existing 8080 code to the new platform). This implies a very
+complicated instruction encoding, with various optional prefixes that
+have been added along the years. The main consequence is that not all
+registers are equivalent, some yielding substantially shorter instruction
+encodings. The main elements to remember are the following:
+\begin{itemize}
+
+    \item The ``historical registers'' (\verb+eax+, \verb+ebx+, \verb+ecx+,
+    \verb+edx+, \verb+esi+, \verb+edi+, \verb+ebp+, and \verb+esp+)
+    are usually better; e.g. \verb+addl %eax, %ebx+ (addition in AT\&T
+    syntax) is encoded over two bytes, but \verb+addl %r8d, %ebx+, which
+    uses the ``new'' register \verb+r8d+, needs three bytes. Some
+    specific operations (in particular \verb+and+ and \verb+test+) have
+    a further shortened encoding when the first operand is \verb+eax+
+    (or its low byte \verb+al+).
+
+    \item 64-bit operations need an extra prefix, thus 8-bit or 32-bit
+    operations should be preferred when possible.
+
+    \item Immediate constants that do not fit in $[-128, 127]$ are
+    usually encoded over four bytes, and should be avoided. This also
+    applies to offsets in address calculations, and to jumps (jumps
+    to nearby locations have a smaller encoding).
+
+    \item 32-bit operations automatically zero-extend the destination
+    register to 64 bits. To set a register to zero, use \verb+xorl+
+    (32-bit bitwise \textsc{xor}) on the register with itself. This is
+    compact (2-byte encoding) and is also semi-officially ``blessed''
+    (this sequence is recognized by the CPU instruction decoder, and
+    handled in the register renaming unit, for an approximately null
+    runtime cost).
+
+    \item ``Old'' instructions have the shortest encodings. This
+    includes instructions such as \verb+loop+ (decrement a counter and
+    jump if non-zero) and \verb+xlat+ (table lookup with a 1-byte
+    index). These instructions are often slow (microcoded execution) and
+    have strict constraints on the involved registers, which impacts
+    register allocation.
+
+    \item Some instructions perform a memory access \emph{and} an index
+    update. These are in particular the \verb+lods+, \verb+stos+ and
+    \verb+movs+ families of instructions. Judicious use of these
+    instructions can help reduce code footprint, but they have strict
+    requirements on register allocation (e.g. \verb+lods+ always uses
+    \verb+rsi+ as index, and loads the value into
+    \verb+eax+/\verb+rax+).
+
+    \item \verb+push+ and \verb+pop+ are encoded over a single byte each
+    when the involved register is an historical one, and move 64 bits at
+    a time. To copy a 64-bit value from an historical register to
+    another one (e.g. \verb+rcx+ to \verb+rdi+), a
+    \verb+push+/\verb+pop+ combination is two bytes, while a 64-bit
+    \verb+mov+ is three bytes. Note that the \verb+mov+ is faster, since
+    it is usually handled by the register renaming unit, and involves no
+    memory traffic (the CPU will normally do the memory write of the
+    \verb+push+ asynchronously, and optimize the \verb+pop+, but the
+    memory write will still need to happen at some point, which is not
+    free).
+
+\end{itemize}
+
+\paragraph{RISC-V Optimizations.}
+RISC-V defines core integer instructions (I) and many sets of extra
+optional instructions; any hardware implementation may include some of
+these extra instruction sets, and formal \emph{profiles} are defined
+which list instruction sets whose presence is guaranteed. For our ECDSA
+implementation, we use the 64-bit mode with the core integer
+instructions (I) as well as the multiplication instructions (M --- only
+multiplication instructions, not division), and the compressed
+instruction encodings (C). These instruction sets are part of all
+currently defined ``application-processor'' profiles.
+
+RISC-V instructions are simple, with a regular encoding; most of the
+size optimization efforts are in register allocation to benefit from the
+compressed instruction encodings (16-bit instructions instead of
+32-bit): while the CPU has 31 general-purpose registers which are mostly
+interchangeable, most compressed encodings can be used only with the 8
+``popular'' registers (\verb+s0+, \verb+s1+, and \verb+a0+ to
+\verb+a5+). To achieve a low code size, the most used registers should
+be chosen among these registers.
+
+Another noteworthy point is that the local function call instruction
+(\verb+jal+) with the target being designated by a label uses a 32-bit
+encoding, while the call-to-register instruction (\verb+jalr+) can use a
+compressed encoding. Just like on x86, we leverage the shorter
+\verb+jalr+ by first obtaining the address of the \verb+decode_int()+
+function into a register, then using it repeatedly with \verb+jalr+.
+Similarly, getting the address of a function or a static variable into a
+register uses the \verb+lla+ sequence, which consists of two 32-bit
+instructions; we endeavour to have as few such sequences as possible,
+hence we ensure that \verb+decode_int()+, the block of constants, and
+the bytecode entry point are all consecutive in the address space, so
+that a single \verb+lla+ may be shared for all three elements.
+
+\paragraph{Armv8-A Optimizations.}
+Armv8-A instructions all use 32 bits; contrary to RISC-V (and to the
+``Thumb'' instructions on 32-bit Arm profiles), there are no compressed
+16-bit instructions, thus little to gain there. This simplifies register
+allocation, since general-purpose registers are interchangeable. The
+local function call (\verb+bl+) uses a single 32-bit instruction; so does
+the \verb+adr+ instruction, which loads the address of a function or a
+static variable in a register. There is therefore no need to get the
+address of \verb+decode_int()+ in a register, or to locate the block of
+constants immediately after that function.
+
+Most size optimization efforts on Armv8-A are spent trying to leverage
+dual-operation instructions, such as memory accesses that also update
+the index register, or arithmetic and logic instructions where an extra
+shift or rotation can be applied to the second operand. In total,
+Armv8-A offers fewer opportunities for size optimizations than RISC-V
+and in particular x86\footnote{To some extent, this why I find assembly
+programming on Armv8-A more pleasant than on x86.}.
+
+\subsection{Missing Optimizations}
+
+A few extra optimizations are possible on the implementations, but I
+refrained from applying them because they would have a substantial cost
+on performance, or, more importantly, would impact the implementation
+clarity and make it more difficult to run unit tests and validate the
+correctness of the implementation.
+
+The virtual CPU runs a loop with a conditional jump over an exit flag,
+and there is a separate macro that winds down the context and translates
+the exit status back into the convention expected by the API function
+caller. These steps could be merged into the \verb+_OK+/\verb+_FAIL+
+code sequence, which would save a few bytes; but it would make it quite
+harder to write unit tests that exercise individual bytecode sequences,
+unless the unit test functions are made to use a different interpreter,
+which would remove most of the point of running unit tests (such tests
+have value precisely because they exercise parts of the implementation,
+and not test-specific code).
+
+Current \verb+_CALL+ implementation is generic and supports arbitrary
+nesting levels of \verb+_CALL+ and \verb+_RET+. The actual
+implementation only uses one level, and could use a dedicated register
+to remember the caller's instruction pointer, instead of using the
+native stack; this would make implementation of \verb+_CALL+ and
+\verb+_RET+ a bit shorter, and would allow using the native stack
+pointer to reference the interpreter context. However, that would
+prevent some \emph{potential} improvements in the bytecode in which
+two-level calls would be useful (e.g. to merge sub-sequences of code in
+\verb+point_add_to_W+).
+
+The current \verb+point_add_to_W+ was obtained by directly translating
+the Renes-Costello-Batina algorithm into 43 three-instruction sequences,
+then doing manual optimizations. It is unlikely that the current state
+is optimal in that respect; further inspection of the operations would
+probably reveal a few opportunities for saving some more bytes.
+
+The current modulus ($p$ or $n$) is currently set with the \verb+_SMOD+
+instruction, and read accesses as variable \verb+_M+ are supported by
+some pointer-swapping in instruction decoding. This is done so because a
+modulus is not only an integer but also includes the Montgomery
+coefficient $2^{w-s}(\umod{-1/m}{2^s})$, which is located immediately
+after the modulus in RAM. This special treatment could be avoided by
+making variable \verb+_M+ a normal value, but expanding all values to an
+internal format with an extra slot for the Montgomery coefficient; this
+slot would simply follow along in value copies, and would be otherwise
+ignored except when the value is used as the modulus in Montgomery
+multiplications.
+
+Presumably, unleashing an AI on our current code could make it somewhat
+shorter, but readability and correctness validation would be lost in the
+process. This validation is a crucial element for cryptographic
+implementations; this is covered in the next section.
+
+% ----------------------------------------------------------------------
+
+\newpage
+\section{Comprehensive Range Analysis}\label{sec:range}
+
+The description of the ECDSA implementation in
+section~\ref{sec:bytecode} highlighted that the correctness of the
+implementation relies on the following properties:
+\begin{itemize}
+
+    \item All the additions and subtractions produce the correct
+    integer results, i.e. on inputs that represent integers $x$ and $y$,
+    addition returns an output that represents $x + y$, and subtraction
+    similarly returns $x - y$. This is not prescriptive on the actual
+    representation (in redundant representation, the same integer may
+    accept multiple representations).
+
+    \item Montgomery multiplications return, for inputs $x$ and $y$, and
+    current modulus $m$, an output $z$ such that $\eqvm{z}{xy/R}{m}$.
+    This is again not prescriptive on representations: it does not
+    require a specific $z$ value since only modular equality is needed
+    here.
+
+    \item Integer canonicalization properly returns an integer in
+    the $[0, m-1]$ range, for the modulus $m$. This property is required
+    for proper bit enumeration over the scalars $u$ and $v$ for the double
+    point multiplication $uG + vQ$, as well as for correctly handling the
+    reinterpretation of $x_W$ into a scalar.
+
+\end{itemize}
+This section is about proving these properties for any possible inputs
+to the ECDSA verification algorithm. This is not a \emph{complete}
+formal proof of the entire implementation, in that it does not cover
+some needed tests, such as verifying that the input $r$ and $s$ are in
+the $[1, n-1]$ range, or the public key point is indeed a curve point.
+Such properties are amenable to a manual, human-based verification by
+simply looking at the code; contrary to rare mathematical edge cases,
+notably related to carry propagation, their analysis should be simple.
+You can add some explicit test vectors if you think that your developers
+would manage to goof up something as simple as, for instance, verifying
+that the input hash value length is between 32 and 64 bytes\footnote{My
+unit test framework has such tests because I did goof it up at some
+point.}.
+
+The proving operation is done in a Python script called
+\verb+rr_ecdsa_range.py+ and provided with the ECDSA implementations.
+
+\subsection{Range Tracking}
+
+The first two properties boil down to verifying that none of the
+operations, which we expressed in section~\ref{sec:montymul} as
+functions \verb+add()+, \verb+sub()+, \verb+longmul_s()+, etc, overflows
+its expected container; we check this no-overflow property by doing a
+range analysis which keeps track of possible values as ranges.
+We define a \emph{range} as a pair of integers $(L, H)$ which mean that
+the value is an element of the interval $[L, H]$ (note that both ends
+are included). When $L = H$, the range is said to be \emph{exact} since
+it pinpoints a single value.
+
+In \verb+rr_ecdsa_range.py+, the \verb+ZRange+ class is defined; each
+instance is immutable and represents a range. Elementary operations on
+ranges are supported, such as additions, multiplications, etc; for
+instance, when multiplying range $(L_1, H_1)$ with range $(L_2, H_2)$,
+the output range is $(L_3, H_3)$ which is such that $L_3$ and $H_3$ are,
+respectively, the minimum and the maximum in the quadruplet $\{ L_1 L_2,
+L_1 H_2, H_1 L_2, H_1 H_2 \}$. We also need to support masking values to
+their $t$ low bits: signed and unsigned $t$-bit masking of an integer
+$x$ mean returning $\smod{x}{2^t}$ and $\umod{x}{2^t}$, respectively.
+For ranges, the implementation of unsigned masking returns the full
+range $[0, 2^t - 1]$ if the input $[L, H]$ is such that $H - L \geq 2^t$
+(all low $t$-bit patterns are possible) or if $\umod{H}{2^t} <
+\umod{L}{2^t}$ (which implies that both $0$ and $2^t - 1$ are possible,
+thus encompassing the whole range, even if some of the values in the
+range are not actually possible); otherwise, the relevant sub-range of
+$[0, 2^t - 1]$ is returned. Signed masking uses unsigned masking with an
+appropriate offset applied before and after the operation.
+
+Building on \verb+ZRange+, the \verb+ZWord+ class represents a machine
+word of $w$ bits. Each instance encapsulates two \verb+ZRange+
+instances: one represents the possible range for the value stored in the
+word, and the other is the container range, which is either $[-2^{w-1},
+2^{w-1} - 1]$ (the word is interpreted as a signed integer) or $[0, 2^w
+- 1]$ (the word is interpreted as an unsigned integer). Arithmetic
+operations are implemented on the value range, and automatically raise
+an exception if the output value range would not entirely fit within the
+container range: this is how overflows on word operations are tracked.
+Explicit ``wrapping'' operations are also provided, which truncate the
+output as appropriate instead of raising an exception; this is used for
+the computation of the Montgomery factors $f_i$, for which the
+truncation, and reinterpretation of an unsigned value as a signed
+integer, are part of the operation semantics.
+
+The \verb+MLInt+ class builds on \verb+ZRange+ and \verb+ZWord+ to
+implement a multi-limb redundant representation of an integer. Each
+\verb+MLInt+ instance has three fields:
+\begin{itemize}
+
+    \item A reference to an overall context structure which contains
+    parameters such as $k$ (number of limbs), $s$ (for radix $2^s$)
+    or flags such as whether signed or unsigned normalization should
+    follow a Montgomery multiplication.
+
+    \item The integer limbs, as an array of $k$ instances of
+    \verb+ZWord+ (with signed interpretation): we keep track of the
+    individual ranges of all limbs separately.
+
+    \item An overall integer range (as a \verb+ZRange+), which qualifies
+    the represented big integer. This may be a strict sub-range of
+    the possible values that could be inferred from the ranges of
+    the individual limbs.
+
+\end{itemize}
+Again, addition, subtraction and negation are implemented, as well
+as Montgomery multiplications. This last operation uses a modulus
+as extra parameter, provided as a \verb+MLIntModulus+ instance, which
+contains the modulus limbs --- as \verb+ZWord+ values, which are not
+necessarily exact if we want to do range analysis with moduli which
+are not known at compile-time --- and some extra parameters such as
+the Montgomery coefficient $\umod{-1/m}{2^s}$.
+
+All the \verb+ZRange+, \verb+ZWord+ and \verb+MLInt+ instances are
+immutable; all mathematical operations return new instances with the
+result. Using immutable instances increases memory allocation traffic
+(hence garbage collection costs) but avoids all possible issues with
+concurrent modifications to the same object.
+
+Since \verb+ZWord+ instances automatically check for overflows, executing
+the operations without any thrown exception implies a correct result
+for all input values fitting in the provided input ranges.
+
+\subsection{Application to ECDSA Verification}
+
+We can use \verb+MLInt+ in a full ECDSA verification: we set the input
+ranges for signature elements, public key coordinates, and hash value
+to the full 256-bit range $[0, 2^{256} - 1]$, and then run the algorithm
+to completion. This requires a representation of the ECDSA code as
+a sequence of operations that the Python script can map to operations
+on \verb+MLInt+ instances. But we already have such a representation:
+the bytecode described in section~\ref{sec:bytecode}.
+
+The \verb+rr_ecdsa_range.py+ thus includes a textual copy of the bytecode
+(as found in the assembly implementations) coupled with a minimal parser
+that turns it into an internal representation of the bytecode instructions;
+a bytecode interpreter then executes the instruction just like the
+virtual machine assembly implementations, except that it maintains the
+state variables as \verb+MLInt+ instances. Two API functions are
+provided:
+\begin{itemize}
+
+    \item \verb+test_ecdsa()+ uses exact ranges as inputs (signature,
+    public key, hash value), i.e. ranges that pinpoint a single value,
+    obtained from a test vector. All 492 Wycheproof test vectors are
+    used. Since the input values are exact, all derived values in the
+    bytecode execution are also exact, and this just runs the ECDSA
+    verifier. Going through all the test vectors is meant to confirm
+    that the bytecode interpreter in \verb+rr_ecdsa_range.py+ is
+    properly implemented\footnote{Running all 492 tests can take a
+    lot of time, more than one hour for some choices of $k$ and $s$,
+    due to the inherent inefficiency of keeping track of ranges and
+    allocating all these values.}.
+
+    \item \verb+range_analysis()+ instead sets inputs to the full
+    256-bit range. As the code unfolds, maximum possible ranges for all
+    words and big integers are computed at all points of the execution;
+    if the end of the computation is reached (the final \verb+_OK+ or
+    \verb+_FAIL+) without triggering any overflow check, then this
+    proves that no overflow is indeed possible in the implementation.
+    Additionally, extra tests are hooked on calls to the
+    \verb+canonicalize+ routine, to check that the obtained big integer
+    value range is indeed $[0, m-1]$ for the relevant modulus $m$ ($n$
+    or $p$, depending on the location of the call).
+
+\end{itemize}
+
+One non-trivial point about this range analysis must be explained: the
+executed code sequence does not always run the same list of
+instructions, since conditional execution is used through the three
+provided ``skip'' instructions (\verb+_SKIPBITZ+, \verb+_SKIPNZ+ and
+\verb+_SKIPNEG+). When the tested value is known with an exact range, or
+at least with a range that is precise enough to yield the information
+(e.g. for \verb+_SKIPNEG+, if the top limb range is entirely negative or
+entirely non-negative), then the interpreter can apply the skip
+semantics; otherwise, the skip operation is said to be \emph{unresolved}
+and the interpreter must assume that both behaviours (skip and non-skip)
+are possible, run \emph{both}, and merge the resulting states. Two
+\verb+MLInt+ values are merged by pairwise merging the ranges of their
+limbs and overall values, the merge of two ranges being the smallest
+range that includes both source ranges. This process must handle a few
+situations:
+\begin{itemize}
+
+    \item When the skip operation is over a \verb+_CALL+ instruction,
+    the called function must be invoked with a fresh copy of the
+    VM state, so that after the function execution, the output state
+    resulting from the function invocation can be merged into the
+    saved state.
+
+    \item Unresolved skips over \verb+_OK+ or \verb+_FAIL+ are simply
+    ignored, since then the no-skip branch exits the VM and contributes
+    no state to merge.
+
+    \item To handle conditional returns in functions (unresolved skips
+    over \verb+_RET+), the call stack records not only the caller's
+    instruction pointer, but also a slot for a ``merged state'' which
+    corresponds to the output states of all conditional returns. This
+    allows computing the overall output state of the function, for all
+    possible ways the function may exit.
+
+    \item For \verb+_SKIPNEG+, the two branches are executed over states
+    that take into account the result of the test: the skipped instruction
+    uses a state that includes the information that the top limb of the
+    value in the accumulator was non-negative (the overall integer value
+    range is also adjusted accordingly), while the saved state (for the
+    ``instruction skipped'' branch) includes the information that the top
+    limb of the value in the accumulator was negative. This is needed in
+    order to prove that canonicalization works properly.
+
+    \item If the skip instruction applies to \verb+_NEXT+,
+    \verb+_FNEXT+, or another skip instruction, then this is explicitly
+    detected and an exception is thrown. This case does not happen in
+    the ECDSA verifier bytecode. Supporting these cases would complicate
+    the range analysis, since the simple execute-and-merge process would
+    no longer suffice.
+
+\end{itemize}
+
+\newenvironment{codedesc4}
+    {\begin{list}
+        {}
+        {\setlength{\labelwidth}{3em}
+         \setlength{\labelsep}{0.5em}
+         \setlength{\itemsep}{1ex}
+         \setlength{\leftmargin}{3.5em}
+         \setlength{\rightmargin}{0em}
+         \let\makelabel=\makecodedesclabel
+        }
+    }
+    {\end{list}}
+
+The \verb+test_ecdsa()+ and \verb+range_analysis()+ functions accept the
+same parameters, the first three of which being mandatory:
+\begin{codedesc4}
+
+    \item[k] Number of limbs (integer).
+
+    \item[s] Limb radix size, in bits (integer).
+
+    \item[w] Machine word size, in bits (integer).
+
+    \item[slf] If \verb+True+, then the Montgomery factors use signed
+    interpretation (a \verb+longmul_s+ is used for multiplying $f_i$
+    with modulus limb $m_j$, as shown in
+    listing~\ref{alg:mmul-redundant}). For the integer canonicalization,
+    as implemented in listing~\ref{alg:canonicalize}, to work properly,
+    \verb+slf+ must be set to \verb+True+. Default value is \verb+False+.
+
+    \item[slv] If \verb+True+, then signed normalization is applied
+    at the end of Montgomery multiplication; default value is
+    \verb+False+, which means that unsigned normalization is applied
+    (as in listing~\ref{alg:mmul-redundant}).
+
+    \item[slm] If \verb+True+, then the moduli ($p$ and $n$) are stored
+    and used in signed-normalized representation; default value is
+    \verb+False+, which implies that the moduli are unsigned-normalized.
+
+    \item[spec] A set of flags, as an integer which is a bitwise \textsc{or}
+    of individual flags (flag $j$ has numerical value $2^j$). When set,
+    each flag adds a \verb+_NORM+ instruction at a specific place; these
+    extra unsigned normalization instructions are needed in some cases,
+    depending on the values of the other parameters (this will be
+    detailed below). Default value is 0 (all flags cleared).
+
+\end{codedesc4}
+A sample usage in a Python command-line prompt is the following:
+{\small\begin{verbatim}
+  $ python3
+  Python 3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0] on linux
+  Type "help", "copyright", "credits" or "license" for more information.
+  >>> from rr_ecdsa_range import *
+  >>> range_analysis(5, 54, 64, slf=True)
+  OK
+  >>> test_ecdsa(5, 54, 64, slf=True)
+  ................................ (etc)
+\end{verbatim}}
+The fact that \verb+range_analysis()+ prints ``OK'' and exits without
+raising an exception shows that when $k = 5$, $s = 54$ (54-bit limbs),
+$w = 64$ (64-bit limbs), and Montgomery factors $f_i$ are interpreted
+as signed values, then the entire ECDSA implementation never overflows
+for any input. Running \verb+test_ecdsa()+ furthermore shows that the
+computation is correct enough for all 492 test vectors.
+
+\subsection{Variants and Flags}\label{sec:range:variants}
+
+The effect of the \verb+slf+, \verb+slv+, \verb+slm+ and \verb+spec+
+parameters is best explained with examples. If we try the calls above
+without \verb+slf=True+, then Montgomery factors are unsigned and the
+calls fail. For instance:
+{\small\begin{verbatim}
+  >>> range_analysis(5, 54, 64)
+  <current IP = 8 [line 14]: ST 5>
+  (...)
+      assert x.low >= 0 and x.high <= mod_N - 1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  AssertionError
+\end{verbatim}}
+The designated instruction is the \verb+_ST+ that immediately follows
+a call to \verb+canonicalize+ (with modulus $n$): the canonicalization
+relies on Montgomery reduction to return a value in $[-\gamma n, +\gamma n]$
+for some constant $\gamma < 1$, and this is ensured only if the Montgomery
+factors are signed; otherwise, the overall reduction factor $f$ can become
+greater than $R/2$, and on output of Montgomery reduction, one may obtain
+an integer equal to or slightly greater than the modulus, which is not
+correctly handled by the current implementation of \verb+canonicalize+,
+which does only one conditional \emph{addition} of the modulus, but not
+a conditional \emph{subtraction}. All our implementations thus use
+\verb+slf=True+.
+
+The $(k, s, w) = (5, 54, 64)$ setting with \verb+slf=True+ is what we
+implement in the 64-bit C code (\verb+gen64+) and all three 64-bit
+assembly implementations (\verb+amd64+, \verb+arm64+ and \verb+rv64+).
+
+If we set \verb+slm=True+, then range analysis still passes successfully,
+but unit tests fail:
+{\small\begin{verbatim}
+  >>> range_analysis(5, 54, 64, slf=True, slm=True)
+  OK
+  >>> test_ecdsa(5, 54, 64, slf=True, slm=True)
+  (...)
+      assert status == 'F'
+             ^^^^^^^^^^^^^
+  AssertionError
+\end{verbatim}}
+The effect of setting \verb+slm+ to \verb+True+ is that the moduli are
+internally signed-normalized instead of unsigned-normalized. For
+instance, in signed-normalized format, the two low limbs of $p$ are $-1$
+and $2^{42}$, instead of $2^{54}-1$ and $2^{42}-1$, respectively. Signed
+normalization of the modulus has the effect that when adding $f_i m$ to
+the intermediate result in Montgomery representation, the integer
+products $f_i m_j$ are smaller in absolute value, which can help with
+avoiding an integer overflow in the limbs. The effect is usually
+marginal, but with some combinations of $k$, $s$ and $w$, it can
+potentially help succeed through a sequence of operations that would
+otherwise potentially trigger an overflow. Unfortunately, using a
+signed-normalized modulus breaks the \verb+invert_mod+ implementation
+(listing~\ref{alg:invert_mod}) because the FLT code needs the exponent
+$m-2$ in canonicalized (unsigned-normalized) format and expects to
+obtain it by simply subtracting 2 from the low limb, which does not work
+if $m$ is signed-normalized. The solution is to add an extra \verb+_NORM+
+instruction to unsigned-normalize the exponent, which we can do by setting
+the special flag 0 through the \verb+spec+ parameter:
+{\small\begin{verbatim}
+  >>> test_ecdsa(5, 54, 64, slf=True, slm=True, spec=1)
+  ................................ (etc)
+\end{verbatim}}
+This enlarges the bytecode by 1 byte.
+
+If we try to make a 32-bit version, we can find that with only
+\verb+slf=True+, range analysis finds no workable solution with $k\leq 12$.
+For instance:
+{\small\begin{verbatim}
+  >>> range_analysis(12, 22, 32, slf=True)
+  <current IP = 198 [line 217]: MUL 23>
+  <current IP = 54 [line 50]: SKIPBITZ 4>
+  (...)
+  Exception: value range [-2273312274, 1056964453] exceeds
+  container range [-2147483648, 2147483647]
+\end{verbatim}}
+This indicates that a limb potentially overflows. The printed reference
+to the offending instruction points to a \verb+_MUL+ opcode which is
+near the end of the \verb+point_add_to_W+ routine. We can then try to
+put a \verb+_NORM+ call right before this multiplication: unsigned
+normalization makes individual limbs smaller, and the extra \verb+_NORM+
+will do that on the accumulator, which is one of the operands of the
+\verb+_MUL+. In the bytecode embedded in \verb+rr_ecdsa_range.py+,
+we placed such a \verb+_NORM+ instruction, enabled with special flag 2
+(i.e. by setting \verb+spec+ to 4):
+{\small\begin{verbatim}
+  >>> range_analysis(12, 22, 32, slf=True, spec=4)
+  OK
+  >>> test_ecdsa(12, 22, 32, slf=True, spec=4)
+  ................................ (etc)
+\end{verbatim}}
+This extra \verb+_NORM+ enlarges the bytecode by 1 byte. This is the
+setting used in the alternate x86 assembly implementation
+(\verb+amd64alt+).
+
+Another option for a 12-limb 32-bit implementation is to use signed
+normalization at the end of each Montgomery multiplication (with
+\verb+slv=True+). Signed normalization makes output limbs smaller (in
+absolute value) and thus should allow more successive additions and
+subtractions before the next multiplication. However, this would
+predictably break canonicalization: the \verb+canonicalize+ routine
+(listing~\ref{alg:canonicalize}) uses Montgomery reduction
+(\verb+_MRED+) then tests the sign of the output with \verb+_SKIPNEG+,
+under the assumption that the top limb will contain the value sign,
+which is true for unsigned-normalized values, but not for
+signed-normalized values. When \verb+slv=True+, we thus need an extra
+\verb+_NORM+ between the \verb+_MRED+ and the \verb+_SKIPNEG+, which in
+\verb+rr_ecdsa_range.py+ is obtained by setting the special flag 1
+(value 2 into \verb+spec+):
+{\small\begin{verbatim}
+  >>> range_analysis(12, 22, 32, slf=True, slv=True, spec=2)
+  OK
+  >>> test_ecdsa(12, 22, 32, slf=True, slv=True, spec=2)
+  ................................ (etc)
+\end{verbatim}}
+This specific setup is what is used in the 32-bit portable C
+implementation (\verb+gen32+). In general, it is slightly less desirable
+than the previous option (with \verb+slv=False+ and an extra
+\verb+_NORM+ in \verb+point_add_to_W+) because it means that the
+compiled code will contain instructions for \emph{both} signed and
+unsigned normalization, instead of just unsigned normalization.
+
+An intriguing third option for a 12-limb 32-bit implementation is to
+use a signed modulus (\verb+slm=True+, and special flag 0 set). It fails
+range analysis, but test vectors pass successfully, which can only mean
+one of two things: either the range analysis is not tight enough, and
+its inherent approximations lead it to reject a valid solution; or the
+value overflow is in fact possible, but rare, and the test vectors do
+not exercise the faulty condition. Avoiding rare edge case is exactly
+why we are doing an extensive range analysis, and we must therefore
+reject that option until an actual correctness proof can be established.
+
+% ----------------------------------------------------------------------
+
+\newpage
+\section{Conclusion}\label{sec:conclusion}
+
+In this paper, we described an implementation technique for Montgomery
+multiplications that avoids most carry propagations and should be
+desirable for computations on platforms for which carry propagation is
+expensive, in particular RISC-V CPUs. The use of redundant
+representations with signed limbs also opens the possibility of
+performing unreduced limb-wise additions and subtractions, which may
+yield non-negligible performance benefits in a speed-oriented
+implementation of relatively complex code sequences, as is common in
+schemes using elliptic curves. This should be applicable, in particular,
+to post-quantum schemes based on isogeny graphs.
+
+An additional potential benefit of redundant representations is, for
+moduli with a special format, selection of an alternate representation
+that would allow more efficient operations; for instance, the parameters
+proposed for the 128-bit security level of FESTA\cite{BasMaiPop2023}, a
+post-quantum isogeny-based public key encryption scheme, use a modulus
+$m$ such that $m+1$ is a multiple of $2^{632}$; in a classic unsigned
+and non-redundant representation, this leads to a sequence of low limbs
+with a large value. However, in a signed redundant representation, we
+could set the lowest limb to $-1$, and then quite a few limbs beyond it
+will have value $0$. Multiplication by $-1$ is efficient, multiplication
+by $0$ even more so. The extent of such optimizations depends on the
+modulus value, but might lead to non-negligible speed improvements. Best
+case seems to be moduli whose binary representation includes a very long
+sequence of ones, so that signed limbs may turn all these into zeros.
+
+We illustrated the technique with an example of questionable usefulness
+(a codegolfed implementation of ECDSA signature verification over NIST
+curve P-256), but appropriate for highlighting how a comprehensive range
+analysis can be performed, as is required in order to use the unreduced
+limb-wise additions and subtractions. Python-based tooling can in
+particular pinpoint where overflows may occur, and help decide where
+extra normalization steps need to be placed. The proof of impossibility
+of overflows, combined with the removal of most carry propagation,
+should help in making correct implementations.
+
+In the implementation process, we also estimated how reliable and useful
+the current crop of AIs can be for implementing cryptographic
+primitives. Verdict is: they produce results quickly, but be very
+cautious, they tend to focus on test vectors, which cannot guarantee
+correctness. You really should ask the AI to produce a companion
+verifiable proof of correctness.
+
+% ----------------------------------------------------------------------
+
+\section*{Acknowledgements}\label{sec:acknowledge}
+
+Many thanks to Steve Weis, who provided access to the AI.
+
+% ----------------------------------------------------------------------
+
+\newpage
+\begin{thebibliography}{20}
+
+% Ideally we would do that only for URLs, but I don't know how to do
+% that in a non-painful way.
+\RaggedRight
+
+%\bibitem{AbdHwaKanSpr2022}
+%A.~Abdulrahman, V.~Hwang, M.~Kannwischer and A.~Sprenkels,
+%\emph{Faster Kyber and Dilithium on the Cortex-M4},
+%Applied Cryptography and Network Security -- ACNS~2022,
+%Lecture Notes In Computer Science, vol.~13269, pp.~853-871, 2022.
+
+%\bibitem{AAPCS}
+%\emph{Procedure Call Standard for the Arm® Architecture},
+%Arm Limited, version 2024Q3, 2024.
+
+%\bibitem{ChoYooSeo2024}
+%J.~Choi, S.~Yoon and S.C.~Seo,
+%\emph{Optimized Falcon Verify on Cortex-M4 for Post-Quantum secure UAV 
+%communications},
+%ICT Express, Elsevier, 2024,\\
+%\url{https://doi.org/10.1016/j.icte.2024.11.002}
+
+%\bibitem{DuzFieFis2024}
+%S.~Düzlü, R.~Fiedler and M.~Fischlin,
+%\emph{BUFFing FALCON without Increasing the Signature Size},\\
+%\url{https://eprint.iacr.org/2024/710}
+
+%\bibitem{GajJanKin2024}
+%P.~Gajland, J.~Janneck and E.~Kiltz,
+%\emph{A Closer Look at Falcon},\\
+%\url{https://eprint.iacr.org/2024/1769}
+
+%\bibitem{Hwa2024}
+%V.~Hwang,
+%\emph{Formal Verification of Emulated Floating-Point Arithmetic in Falcon},\\
+%Advances in Information and Computer Security: 19th International Workshop
+%on Security -- IWSEC 2024, Lecture Notes in Computer Science,
+%vol.~14977, pp.~125-141, 2024.
+
+%\bibitem{ieee754}
+%\emph{IEEE Standard for Binary Floating-Point Arithmetic}, 1985,\\
+%\url{https://doi.org/10.1109%2FIEEESTD.1985.82928}
+
+%\bibitem{Gol1991}
+%D.~Goldberg,
+%\emph{What Every Computer Scientist Should Know About Floating-Point
+%Arithmetic},
+%ACM Computing Surveys (CSUR), vol.~23, issue~1, pp.~5-48, 1991.
+
+%\bibitem{KanRijSchSto2019}
+%M.~Kannwischer, J.~Rijneveld, P.~Schwabe and K.~Stoffelen,
+%\emph{pqm4: Testing and Benchmarking NIST PQC on ARM Cortex-M4},\\
+%\url{https://eprint.iacr.org/2019/844}
+
+%\bibitem{NISTPQC}
+%\emph{Post-Quantum Cryptography},
+%National Institute of Standard and Technology,\\
+%\url{https://www.nist.gov/pqcrypto}
+
+%\bibitem{Por2019}
+%T.~Pornin,
+%\emph{New Efficient, Constant-Time Implementations of Falcon},\\
+%\url{https://eprint.iacr.org/2019/893}
+
+%\bibitem{Por2020-1}
+%T.~Pornin,
+%\emph{Efficient Elliptic Curve Operations On Microcontrollers With
+%Finite Field Extensions},\\
+%\url{https://eprint.iacr.org/2020/009}
+
+%\bibitem{Por2023-1}
+%T.~Pornin,
+%\emph{Improved Key Pair Generation for Falcon, BAT and Hawk},\\
+%\url{https://eprint.iacr.org/2023/290}
+
+%\bibitem{XKCP}
+%G.~Bertoni, J.~Daemen, S.~Hoffert, M.~Peeters, G.~Van~Assche and
+%R.~Van~Keer,
+%\emph{eXtended Keccak Code Package},\\
+%\url{https://github.com/XKCP/XKCP}
+
+%\bibitem{AarAra2022}
+%M.~Aardal and D.~Aranha,
+%\emph{2DT-GLS: Faster and exception-free scalar multiplication in the
+%GLS254 binary curve},\\
+%\url{https://eprint.iacr.org/2022/748}
+
+%\bibitem{AmbBosFayJoyLocMur2017}
+%C.~Ambrose, J.~Bos, B.~Fay, M.~Joye, M.~Lochter and B.~Murray,
+%\emph{Differential Attacks on Deterministic Signatures},\\
+%\url{https://eprint.iacr.org/2017/975}
+
+\bibitem{X962}
+Accredited Standards Committee X9,
+\emph{The Elliptic Curve Digital Signature Algorithm (ECDSA)},
+American National Standards Institute, ANS X9.62, 2005.
+
+\bibitem{X963}
+Accredited Standards Committee X9,
+\emph{Key Agreement and Key Transport Using Elliptic Curve Cryptography},
+American National Standards Institute, ANS X9.63, 2017.
+
+%\bibitem{AntBroGalLamStrVan2005}
+%A.~Antipa, D.~Brown, R.~Gallant, R.~Lambert, R.~Struik and S.~Vanstone,
+%\emph{Accelerated Verification of ECDSA signatures},
+%Selected Areas in Cryptography - SAC 2005, Lecture Notes in Computer
+%Science, vol.~3897, pp.~307-318, 2005.
+
+%\bibitem{AraLopHan2010}
+%D.~Aranha, J.~López and D.~Hankerson,
+%\emph{Efficient Software Implementation of Binary Field Arithmetic Using
+%Vector Instruction Sets},
+%Progress in Cryptology - LATINCRYPT 2010,
+%Lecture Notes in Computer Science, vol.~6212, pp.~144-161, 2010.
+
+%\bibitem{RistrettoWeb}
+%T.~Arcieri, I.~Lovecruft and H.~de Valence,
+%\emph{The Ristretto Group},\\
+%\url{https://ristretto.group/}
+
+%\bibitem{Atk1992}
+%A.~Atkin,
+%\emph{Probabilistic primality testing (summary by F. Morain)}, Technical Report 1779, INRIA, 1992,\\
+%\url{http://algo.inria.fr/seminars/sem91-92/atkin.pdf}
+
+\bibitem{BasMaiPop2023}
+A.~Basso, L.~Maino and G.~Pope,
+\emph{FESTA: Fast Encryption from Supersingular Torsion Attacks},\\
+\url{https://ia.cr/2023/660}
+
+\bibitem{Ber2006}
+D.~Bernstein,
+\emph{Curve25519: new Diffie-Hellman speed records},
+Public Key Cryptography - PKC 2006,
+Lecture Notes in Computer Science, vol.~3958, pp.~207-228, 2006.
+
+\bibitem{BerDuiLanSchYan2012}
+D.~Bernstein, N.~Duif, T.~Lange, P.~Schwabe and B.-Y.~Yang,
+\emph{High-speed high-security signatures},
+Journal of Cryptographic Engineering, vol.~2, issue~2, pp.~77-89, 2012.
+
+%\bibitem{eBACS}
+%D.~Bernstein and T.~Lange,
+%\emph{eBACS: ECRYPT Benchmarking of Cryptographic Systems},\\
+%\url{https://bench.cr.yp.to} (accessed 4 August 2022).
+
+%\bibitem{BerLanRez2008}
+%D.~Bernstein, T.~Lange and R.~Rezaeian Farashahi,
+%\emph{Binary Edwards Curves},
+%Cryptographic Hardware and Embedded Systems - CHES 2008,
+%Lecture Notes in Computer Science, vol.~5154, pp.~244-265, 2008.
+
+%\bibitem{BerHamKraLan2013}
+%D.~Bernstein, M.~Hamburg, A.~Krasnova and T.~Lange,
+%\emph{Elligator: elliptic-curve points indistinguishable from uniform
+%random strings},
+%Proceedings of the 2013 ACM SIGSAC Conference on Computer and Communications
+%Security, 2013,\\
+%\url{https://doi.org/10.1145/2508859.2516734}
+
+%\bibitem{BerYan2019}
+%D.~Bernstein and B.-Y.~Yang,
+%\emph{Fast constant-time gcd computation and modular inversion},\\
+%\url{https://gcd.cr.yp.to/papers.html#safegcd}
+
+%\bibitem{BilJoy2003}
+%O.~Billet and M.~Joye,
+%\emph{The Jacobi model of an elliptic curve and side-channel analysis},
+%AAECC-15, Lecture Notes in Computer Science, vol.~2643, pp.~34-42, 2003.
+
+%\bibitem{Bod2007}
+%M.~Bodrato,
+%\emph{Towards Optimal Toom-Cook Multiplication for Univariate and
+%Multivariate Polynomials in Characteristic 2 and 0},
+%International Workshop on the Arithmetic of Finite Fields - WAIFI 2007,
+%Lecture Notes in Computer Science, vol.~4547, pp.~116-133, 2007.
+
+%\bibitem{BreGauThoZim2008}
+%R.~Brent, P.~Gaudry, E.~Thomé and P.~Zimmerman,
+%\emph{Faster multiplication in GF(2)[x]},
+%Algorithmic Number Theory - ANTS-VIII, Lecture Notes in Computer Science,
+%vol.~5011, pp.~153-166, 2008.
+
+%\bibitem{BriCorIcaMadRanTib2010}
+%É.~Brier, J.-S.~Coron, T.~Icart, D.~Madore, H.~Randriam and M.~Tibouchi,
+%\emph{Efficient Indifferentiable Hashing into Ordinary Elliptic Curves},
+%Advances in Cryptology - CRYPTO 2010, Lecture Notes in Computer Science,
+%vol.~6223, pp.~237-254, 2010.
+
+\bibitem{Bri1983}
+E.~Brickell,
+\emph{A Fast Modular Multiplication Algorithm with Application to Two Key
+Cryptography},
+Advances in Cryptology - CRYPTO 1982, pp.~51-60, 1983
+
+%\bibitem{BruCurHof1993}
+%H.~Brunner, A.~Curriger and M.~Hofstetter,
+%\emph{On computing multiplicative inverses in GF($2^m$)},
+%IEEE Transactions on Computers, vol.~42, issue~8, pp.~1010-1015, 1993.
+
+%\bibitem{CanKal1991}
+%D.~Cantor and E.~Kaltofen,
+%\emph{On fast multiplication of polynomials over arbitrary algebras},
+%Acta Informatica, vol.~28, issue~7, pp.~693-701, 1991.
+
+%\bibitem{SEC2v2}
+%Certicom Research,
+%\emph{SEC 2: Recommended Elliptic Curve Domain Parameters},
+%version~2.0, 2010,\\
+%\url{https://www.secg.org/sec2-v2.pdf}
+
+%\bibitem{Cha2022}
+%K.~Chalkias,
+%\emph{ed25519-unsafe-libs},\\
+%\url{https://github.com/MystenLabs/ed25519-unsafe-libs}
+
+%\bibitem{ChaGarNik2020}
+%K.~Chalkias, F.~Garillot and V.~Nikolaenko,
+%\emph{Taming the Many EdDSAs},
+%Security Standardisation Research - SSR 2020, Lecture Notes in
+%Computer Science, vol.~12529, pp.~67-90, 2020.
+
+%\bibitem{ChuChu1986}
+%D.~Chudnovsky and G.~Chudnovsky,
+%\emph{Sequences of numbers generated by addition
+%in formal groups and new primality and factorization tests},
+%Advances in Applied Mathematics, vol.~7, issue~4, pp.~385–434, 1986.
+
+%\bibitem{CohFre2006}
+%H.~Cohen and G.~Frey (editors),
+%\emph{Handbook of Elliptic and Hyperelliptic Curve Cryptography},
+%Chapman and Hall/CRC, 2006.
+
+\bibitem{Col1726}
+J.~Colson,
+\emph{A Short Account of Negativo-Affirmative Arithmetick},
+Philosophical Transactions (1683-1775), vol.~34, pp.~161-173, 1726.
+
+%\bibitem{FrostDraft}
+%D.~Connolly, C.~Komlo, I.~Goldberg and C.~Wood,
+%\emph{Two-Round Threshold Schnorr Signatures with FROST},\\
+%\url{https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-frost-08}
+
+%\bibitem{CreJac2019}
+%C.~Cremers and D.~Jackson,
+%\emph{Prime, Order Please! Revisiting Small Subgroup and Invalid Curve
+%Attacks on Protocols using Diffie-Hellman},
+%IEEE 32nd Computer Security Foundations Symposium (CSF), 2019.
+
+%\bibitem{dalek-crypto}
+%I.~Lovecruft and H.~de Valence,
+%\emph{Dalek cryptography},\\
+%\url{https://github.com/dalek-cryptography}
+
+\bibitem{DifHel1976}
+W.~Diffie and M.~Hellman,
+\emph{New directions in cryptography},
+IEEE Transactions on Information Theory, vol.~22, issue~6, pp.~644-654, 1976.
+
+%\bibitem{Duq2007}
+%S.~Duquesne,
+%\emph{Improving the arithmetic of elliptic curves in the Jacobi model},
+%Information Processing Letters, vol.~104, issue~3, pp.~101–105, 2007.
+
+%\bibitem{FisPat1974}
+%M.~Fischer and M.~Paterson,
+%\emph{String-Matching and Other Products},
+%MAC Technical Memorandum 41, Massachusetts Institute of Technology, 1974.
+
+%\bibitem{Fog2023}
+%A.~Fog,
+%\emph{The microarchitecture of Intel, AMD, and VIA CPUs},\\
+%\url{https://www.agner.org/optimize/microarchitecture.pdf}
+
+%\bibitem{GalLamVan2001}
+%R.~Gallant, J.~Lambert and S.~Vanstone,
+%\emph{Faster Point Multiplication on Elliptic Curves with Efficient
+%Endomorphisms},
+%Advances in Cryptology - CRYPTO 2001, Lecture Notes in Computer Science,
+%vol.~2139, pp.~190-200, 2001.
+
+%\bibitem{GalLinSco2009}
+%S.~Galbraith, X.~Lin and M.~Scott,
+%\emph{Endomorphisms for Faster Elliptic Curve Cryptography on a Large
+%Class of Curves},
+%Advances in Cryptology - EUROCRYPT 2009, Lecture Notes in Compute Science,
+%vol.~5479, pp.~518-535, 2009.
+
+%\bibitem{GauHesSma2002}
+%P.~Gaudry, F.~Hess and N.~Smart,
+%\emph{Constructive and destructive facets of Weil descent on elliptic curves},
+%Journal of Cryptology, vol.~15, issue~1, pp.~19-46, 2002.
+
+%\bibitem{Ham2009}
+%M.~Hamburg,
+%\emph{Accelerating AES with Vector Permute Instructions},
+%Cryptographic Hardware and Embedded Systems - CHES 2009,
+%Lecture Notes in Computer Science, vol.~5747, pp.~18-32, 2009.
+
+%\bibitem{Ham2015-1}
+%M.~Hamburg,
+%\emph{Decaf: Eliminating cofactors through point compression},
+%Advances in Cryptology - CRYPTO 2015, Lecture Notes in Computer Science,
+%vol.~9215, pp.~705-723, 2015.
+
+%\bibitem{Ham2015-2}
+%M.~Hamburg,
+%\emph{Ed448-Goldilocks, a new elliptic curve},\\
+%\url{https://eprint.iacr.org/2015/625}
+
+%\bibitem{HanKarMen2009}
+%D.~Hankerson, K.~Karabina and A.~Menezes,
+%\emph{Analyzing the Galbraith-Lin-Scott Point Multiplication Method for
+%Elliptic Curves over Binary Fields},
+%IEEE Transactions on Computers, vol.~58, issue~10, pp.~1411-1420, 2009.
+
+%\bibitem{HanMenVan2004}
+%D.~Hankerson, A.~Menezes and S.~Vanstone,
+%\emph{Guide to Elliptic Curve Cryptography},
+%Springer/Sci-Tech/Trade, 2004.
+
+%\bibitem{HisWonCarDaw2008}
+%H.~Hisil, K.~Wong, G.~Carter and E.~Dawson,
+%\emph{Twisted Edwards Curves Revisited},
+%Advances in Cryptology - ASIACRYPT 2008, Lecture Notes in Computer Science,
+%vol.~5350, pp.~326-343, 2008.
+
+%\bibitem{HisWonCarDaw2009}
+%H.~Hisil, K.~Wong, G.~Carter and E.~Dawson,
+%\emph{Jacobi Quartic Curves Revisited},
+%Information Security and Privacy - ACISP 2009, Lecture Notes in Computer
+%Science, vol.~5594, pp.~452-468, 2009.
+
+\bibitem{Hon1989}
+J.~Honkala,
+\emph{On Number Systems with Negative Digits},
+Annales Academiæ Scientiarum Fennicæ, Series A. I. Mathematica,
+vol.~14, issue~1, pp.149-156, 1989.
+
+%\bibitem{ItoTsu1988}
+%T.~Itoh and S.~Tsujii,
+%\emph{A Fast Algorithm for Computing Multiplicative Inverses in
+%$\GF(2^m)$ Using Normal Bases},
+%Information and Computation, vol.~78, pp.~171-177, 1988.
+
+%\bibitem{Jac1829}
+%C.~G.~J.~Jacobi,
+%\emph{Fundamenta nova theoriae functionum ellipticarum},
+%Sumtibus fratrum, 1829.
+
+%\bibitem{EdDSArfc8032}
+%S.~Josefsson and I.~Liusvaara,
+%\emph{Edwards-Curve Digital Signature Algorithm (EdDSA)},\\
+%\url{https://tools.ietf.org/html/rfc8032}
+
+%\bibitem{KarOfm1962}
+%А.~Карацуба and Ю.~Офман,
+%\emph{Умножение Многозначных Чисел На Автоматах},
+%Доклады Академи и наук СССР, vol.~145, issue~2, pp.~293-294, 1962.
+%{\fontencoding{T2A}\fontfamily{NimbusSerif}\selectfont А.~Карацуба}
+%and {\fontencoding{T2A}\fontfamily{NimbusSerif}\selectfont Ю.~Офман,
+%\emph{Умножение Многозначных Чисел На Автоматах},
+%Доклады Академи и наук СССР}, vol.~145, pp.~293-294, 1962.
+%A.~Karatsuba and Y.~Ofman,
+%\emph{Multiplication of Many-Digital Numbers by Automatic Computers},
+%Proceedings of the USSR Academy of Sciences, vol.~145, pp.~293-294, 1962.
+
+%\bibitem{KimKim2007}
+%K.~Kim and S.~Kim,
+%\emph{A New Method for Speeding Up Arithmetic on Elliptic Curves over
+%Binary Fields},\\
+%\url{https://eprint.iacr.org/2007/181}
+
+%\bibitem{Knu1969}
+%D.~Knuth,
+%\emph{The Art of Computer Programming, volume~2: Seminumerical Algorithms},
+%Addison-Wesley, 1969.
+
+%\bibitem{KomGol2020}
+%C.~Komlo and I.~Goldberg,
+%\emph{FROST: Flexible Round-Optimized Schnorr Threshold Signatures},\\
+%\url{https://eprint.iacr.org/2020/852}
+
+%\bibitem{rfc7748}
+%A.~Langley, M.~Hamburg and S.~Turner,
+%\emph{Elliptic Curves for Security},\\
+%\url{https://www.rfc-editor.org/rfc/rfc7748}
+
+\bibitem{Lean}
+{\fontspec{texgyreadventor-regular.otf}\selectfont{L\kern -0.1em\reflectbox{E}\kern -0.13em\raisebox{\depth}{\scalebox{1}[-1]{A}}\kern -0.13em{N}}} \emph{Programming Language},\\
+\url{https://lean-lang.org/}
+
+%\bibitem{Len2019}
+%E.~Lenngren,
+%\emph{X25519 for ARM AArch64},\\
+%\url{https://github.com/Emill/X25519-AArch64}
+
+%\bibitem{Len2020}
+%E.~Lenngren,
+%\emph{X25519 for ARM Cortex-M4 and other ARM processors},\\
+%\url{https://github.com/Emill/X25519-Cortex-M4}
+
+%\bibitem{LopDah1999}
+%J.~López and R.~Dahab,
+%\emph{Fast Multiplication on Elliptic Curve Over $\GF(2^m)$ without
+%precomputation},
+%Cryptographic Hardware and Embedded Systems - CHES'99,
+%Lecture Notes in Computer Science, vol.~1717, pp.~316-327, 1999.
+
+\bibitem{MenOorVan1996}
+A.~Menezes, P.~van Oorschot and S.~Vanstone,
+\emph{Handbook of Applied Cryptography},
+CRC Press, 1996,\\
+\url{https://cacr.uwaterloo.ca/hac/}
+
+\bibitem{Mon1985}
+P.~Montgomery,
+\emph{Modular Multiplication Without Trial Division},
+Mathematics of Computation, vol.~44, issue~170, pp.~519-521, 1985.
+
+%\bibitem{MooShu2011}
+%D.~Moody and D.~Shumow,
+%\emph{Analogues of Vélu's Formulas for Isogenies on Alternate Models of
+%Elliptic Curves},
+%\url{https://eprint.iacr.org/2011/430}
+
+%\bibitem{NacSte2001}
+%D.~Naccache and J.~Stern,
+%\emph{Signing on a Postcard},
+%Financial Cryptography - FC 2000, Lecture Notes in Computer Science,
+%vol.~1962, pp.~121-135, 2001.
+
+%\bibitem{NatSar2020}
+%K.~Nath and P.~Sarkar,
+%\emph{Efficient 4-way Vectorizations of the Montgomery Ladder},\\
+%\url{https://eprint.iacr.org/2020/378}
+
+%\bibitem{NevSmaWar2009}
+%G.~Neven, N.~P.~Smart and B.Warinschi,
+%\emph{Hash function requirements for Schnorr signatures},
+%Journal of Mathematical Cryptology, vol.~3, issue 1, pp.~69-87, 2009.
+
+%\bibitem{Fips180}
+%Information Technology Laboratory,
+%\emph{Secure Hash Standard (SHS)},
+%National Institute of Standard and Technology, FIPS~180-4, 2015.
+
+\bibitem{Fips186}
+Information Technology Laboratory,
+\emph{Digital Signature Standard (DSS)},
+National Institute of Standard and Technology, FIPS~186-5, 2023.
+
+%\bibitem{Fips202}
+%Information Technology Laboratory,
+%\emph{SHA-3 Standard: Permutation-Based Hash and Extendable-Output
+%Functions},
+%National Institute of Standard and Technology, FIPS~202, 2015.
+
+\bibitem{Fips203}
+Information Technology Laboratory,
+\emph{Module-Lattice-Based Key-Encapsulation Mechanism Standard},
+National Institute of Standard and Technology, FIPS~203, 2024.
+
+\bibitem{Fips204}
+Information Technology Laboratory,
+\emph{Module-Lattice-Based Digital Signature Standard},
+National Institute of Standard and Technology, FIPS~204, 2024.
+
+%\bibitem{BLAKE3}
+%J.~O'Connor, J.-P.~Aumasson, S.~Neves and Z.~Wilcox-O'Hearn,
+%\emph{BLAKE3},\\
+%\url{https://github.com/BLAKE3-team/BLAKE3}
+
+%\bibitem{OliLopAraRod2014}
+%T.~Oliveira, J.~López-Hernández, D.~Aranha and F.~Rodríguez-Henríquez,
+%\emph{Two is the fastest prime: lambda coordinates for binary elliptic
+%curves},
+%Journal of Cryptographic Engineering, vol.~4, issue~1, pp.~3-17, 2014.
+
+%\bibitem{OliLopAraRod2016}
+%T.~Oliveira, J.~López-Hernández, D.~Aranha and F.~Rodríguez-Henríquez,
+%\emph{Improving the performance of the GLS254},
+%Presented at the CHES 2016 Rump Session.
+
+%\bibitem{PetQui2012}
+%C.~Petit and J.-J.~Quisquater,
+%\emph{On Polynomial Systems Arising from a Weil Descent},
+%Advances in Cryptology - ASIACRYPT 2012,
+%Lecture Notes in Computer Science, vol.~7658, pp.~451-466, 2012.
+
+\bibitem{PhaKor1994}
+D.~Phatak and I.~Koren,
+\emph{Hybrid Signed-Digit Number Systems: A Unified Framework for
+Redundant Number Representations With Bounded Carry Propagation Chains},
+IEEE Transactions on Computers, vol.~43, issue~8, pp.~880-891, 1994.
+
+%\bibitem{PodSomSchLocRos2018}
+%D.~Poddebniak, J.~Somorovsky, S.~Schinzel, M.~Lochter and P.~Rösler,
+%\emph{Attacking Deterministic Signature Schemes Using Fault Attacks},
+%2018 IEEE European Symposium on Security and Privacy (EuroS\&P),
+%pp.~338-352, 2018.
+
+%\bibitem{DeterministicECDSArfc}
+%T.~Pornin,
+%\emph{Deterministic Usage of the Digital Signature Algorithm (DSA) and
+%Elliptic Curve Digital Signature Algorithm (ECDSA)},\\
+%\url{https://tools.ietf.org/html/rfc6979}
+
+%\bibitem{BearSSL}
+%T.~Pornin,
+%\emph{BearSSL: a smaller SSL/TLS library},\\
+%\url{https://www.bearssl.org/}
+
+%\bibitem{Por2020-2}
+%T.~Pornin,
+%\emph{Optimized Lattice Basis Reduction In Dimension 2, and Fast Schnorr
+%and EdDSA Signature Verification},\\
+%\url{https://eprint.iacr.org/2020/454}
+
+%\bibitem{Por2020-3}
+%T.~Pornin,
+%\emph{Optimized Binary GCD for Modular Inversion},\\
+%\url{https://eprint.iacr.org/2020/972}
+
+%\bibitem{Por2020-5}
+%T.~Pornin,
+%\emph{Double-Odd Elliptic Curves},\\
+%\url{https://eprint.iacr.org/2020/1558}
+
+%\bibitem{Por2022-4}
+%T.~Pornin,
+%\emph{Double-Odd Jacobi Quartic},\\
+%\url{https://eprint.iacr.org/2022/1052}
+
+%\bibitem{Por2022-6}
+%T.~Pornin,
+%\emph{Efficient and Complete Formulas for Binary Curves},\\
+%\url{https://eprint.iacr.org/2022/1325}
+
+%\bibitem{Por2023-3}
+%T.~Pornin,
+%\emph{On Multiplications with Unsaturated Limbs},\\
+%\url{https://research.nccgroup.com/2023/09/18/on-multiplications-with-unsaturated-limbs/}
+
+\bibitem{FalconRound3}
+T.~Prest, P.-A.~Fouque, J.~Hoffstein, P.~Kirchner,
+V.~Lyubashevsky, T.~Pornin, T.~Ricosset, G.~Seiler, W.~Whyte and Z.~Zhang,
+\emph{Falcon},
+Technical report, National Institute of Standards and Technology, 2019,
+\url{https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-3-submissions}
+
+\bibitem{RenCosBat2016}
+J.~Renes, C.~Costello and L.~Batina,
+\emph{Complete Addition Formulas for Prime Order Elliptic Curves},
+Advances in Cryptology - EUROCRYPT 2016, Lecture Notes in Compute Science,
+vol.~9665, pp.~403-428, 2016.\\
+\url{https://ia.cr/2015/1060}
+
+\bibitem{RivShaAdl1978}
+R.~Rivest, A.~Shamir and L.~Adleman,
+\emph{A Method for Obtaining Digital Signatures and Public-Key Cryptosystems},
+Communications of the ACM, vol.~21, issue~2, pp.~120-126, 1978.
+
+%\bibitem{BLAKE2}
+%M.-J.~Saarinen and J.-P.~Aumasson,
+%\emph{The BLAKE2 Cryptographic Hash and Message Authentication Code (MAC)}\\
+%\url{https://datatracker.ietf.org/doc/html/rfc7693}
+
+%\bibitem{Sch1989}
+%C.~Schnorr,
+%\emph{Efficient identification and signatures for smart cards},
+%Advances in Cryptology - CRYPTO '89, Lecture Notes in Computer Science,
+%vol.~435, pp.~239-252, 1990.
+
+%\bibitem{ShaWoe2006}
+%A.~Shallue and C.~van de Woestijne,
+%\emph{Construction of rational points on elliptic curves over finite
+%fields},
+%Algorithm Number Theory Symposium - ANTS 2006, Lecture Notes in Computer
+%Science, vol.~4076, pp.~510-524, 2006.
+
+%\bibitem{Sil2009}
+%J.~Silverman,
+%\emph{The Arithmetic of Elliptic Curves} (2nd edition),
+%Springer New York, NY, 2009.
+
+%\bibitem{Sol2000}
+%J.~Solinas,
+%\emph{Efficient Arithmetic on Koblitz Curves},
+%Designs, Codes and Cryptography, vol.~19, issue~2-3, pp.~195-249, 2000.
+
+%\bibitem{Str1964}
+%E.~Straus,
+%\emph{Addition chains of vectors (problem 5125)},
+%American Mathematical Monthly, vol.~70, pp.~806-808, 1964.
+
+%\bibitem{Too1963}
+%А.~Тоом,
+%\emph{О сложности схемы из функциональных злементов, реализирующей
+%умножение целых чисел},
+%Доклады Академи и наук СССР, vol.~153, issue~3, pp.~496-498, 1963.
+
+%\bibitem{Ula2007}
+%M.~Ulas,
+%\emph{Rational Points on Certain Hyperelliptic Curves over Finite Fields},
+%Bulletin of the Polish Academy of Sciences - Mathematics, vol.~55,
+%issue~2, pp.~97-104, 2007.
+
+%\bibitem{RistrettoDraft}
+%H.~de Valence, J.~Grigg, M.~Hamburg, I.~Lovecruft, G.~Tankersly and
+%F.~Valsorda,
+%\emph{The ristretto255 and decaf448 Groups},\\
+%\url{https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-ristretto255-decaf448-03}
+
+%\bibitem{Vel1971}
+%J.~Vélu,
+%\emph{Isogénies entre courbes elliptiques},
+%C.R. Acad. Sc. Paris, Série A, vol.~273, pp.~238-241, 1971.
+
+%\bibitem{Was2008}
+%L.~Washington,
+%\emph{Elliptic Curves: Number Theory and Cryptography} (2nd edition),
+%Chapman and Hall/CRC, 2008.
+
+%\bibitem{WhiWat1927}
+%E.~Whittaker and G.~Watson,
+%\emph{A Course of Modern Analysis},
+%Cambridge University Press, 1927.
+
+\bibitem{Wycheproof}
+\emph{Project Wycheproof},\\
+\url{https://github.com/C2SP/wycheproof}
+
+\end{thebibliography}
+
+% ----------------------------------------------------------------------
+
+\end{document}
