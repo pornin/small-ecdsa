@@ -9,7 +9,9 @@ bytes). The implementations are stand-alone (no use of the libc
 functions). Message hashing is not included (the API expects an already
 hashed message).
 
-The [paper](tex/mmul.pdf) describes how these implementations work. They
+The [paper](tex/mmul.pdf) (also available on
+[eprint.iacr.org/2026/780](https://ia.cr/2026/780)) describes how these
+implementations work. They
 leverage Montgomery multiplication with a signed redundant integer
 representation, over 5 limbs of 54 bits, or 12 limbs of 22 bits,
 depending on the variant. The paper also explains how to invoke the
